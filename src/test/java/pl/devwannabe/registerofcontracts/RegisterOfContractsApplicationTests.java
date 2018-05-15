@@ -1,4 +1,4 @@
-package pl.devwannabe.registerOfContracts;
+package pl.devwannabe.registerofcontracts;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
