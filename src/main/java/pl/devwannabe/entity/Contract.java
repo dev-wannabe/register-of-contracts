@@ -1,6 +1,10 @@
-package pl.devwannabe.registerofcontracts.entity;
+package pl.devwannabe.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,6 +12,9 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contract {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +28,11 @@ public class Contract {
     private String name;
 
     @Column(nullable = false, name = "START_DATE")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate startDate;
 
     @Column(nullable = false, name = "END_DATE")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate endDate;
 
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
@@ -33,7 +42,7 @@ public class Contract {
     private String scale;
 
     @Column(nullable = false)
-    private Boolean active;
+    private Boolean active = true;
 
     public Contract withId(final Long id) {
         this.id = id;
@@ -86,27 +95,15 @@ public class Contract {
                 ", <b>end date:</b> " + endDate +
                 ", <b>impact:</b> " + impact + " zł"   +
                 ", <b>scale:</b> " + scale +
-                ", <b>active:</b> " + yesOrNo(active) +
+                ", <b>active:</b> " + active +
                 '}';
 
     }
 
 
 
-    public String yesOrNo(Boolean active) {
-        String answer = "";
-        if(active == true) {
-            answer = "Yes";
-        }else if(active == false) {
-            answer = "No";
-        }else{
-            answer = "No information";
-        }
-        return answer;
-    }
-
     //TODO
-    public boolean isActive(LocalDate startDate, LocalDate endDate){
+    public boolean isActive(LocalDate startDate, LocalDate endDate) {
         return true;
     }
 
