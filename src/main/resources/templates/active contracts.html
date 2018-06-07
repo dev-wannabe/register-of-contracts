@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Register of contract</title>
+    <!--  <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/> -->
+
+
+    <script type="text/javascript"
+            src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+
+
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}">
+
+
+</head>
+
+<body>
+
+<div class="container"> </br>
+
+    <p>
+    <h1>Register of contracts</h1>
+    </p>
+
+    <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
+
+
+    <p>
+        <a href="/main" th:href="@{/main}"><big>All contracts</big></a>
+        &nbsp
+        &nbsp
+        <a href="/" th:href="@{/active}"><big>Active contracts</big></a>
+        &nbsp
+        &nbsp
+        <a href="/" th:href="@{/descriptions}"><big>Systems descriptions</big></a>
+        &nbsp
+        &nbsp
+        <a href="/" th:href="@{/}"><big>About</big></a>
+    </p> </br> </br>
+
+
+    <button class="btn btn-success newBtn">New</button>
+
+
+    <div class="card">
+        <div class="card-block">
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <!-- <th>ID</th> -->
+                    <th>Number of contract</th>
+                    <th><b>Name of system</b></th>
+                    <th><b>Start date</b></th>
+                    <th><b>End date</b></th>
+                    <th><b>Impact</b></th>
+                    <th><b>Scale</b></th>
+                    <th><b>Active</b></th>
+                </tr>
+                </thead>
+
+                <tbody> <!-- th:remove="all-but-first">
+                   pokazuje drugi element jeżeli pierwszy jest pusty -->
+                <tr th:each="contract : ${contractList}">
+
+                    <!--  <td th:text="${contract.id}"></td> -->
+                    <td th:text="${contract.number}"></td>
+                    <td th:text="${contract.name}"></td>
+                    <td th:text="${contract.startDate}"></td>
+                    <td th:text="${contract.endDate}"></td>
+                    <td th:text="${#numbers.formatDecimal (contract.impact, 1, 2) + ' zł'}"></td>
+                    <td th:text="${contract.scale}"></td>
+                    <td th:text="${contract.active ? 'Yes' : 'No'}"></td>
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
+                    <td>
+                    <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
+
+
+                    <!--<td th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$350</td>
+    <td th:text="${#dates.format(product.availableFrom, 'dd-MMM-yyyy')}">28-Jun-2013</td> -->
+
+                </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+            <button type="button" class="btn btn-dark csvBtn">Export csv</button>
+            <br/>
+            <hr/>
+
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"
+                    th:each="i : ${#numbers.sequence(0, contractList.totalPages -1)}">
+                    <a th:href="@{/active(page=${i})}" th:text="${i}" class="nav-link"
+                       th:classappend="${currentPage}==${i}?'active':''"></a>
+
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+    <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA EDIT--------->
+
+    <div class="myForm">
+        <form th:action="@{/save}" method="post">
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="id" name="id" value=""/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="number" class="col-form-label">Number:</label>
+                                <input type="text" class="form-control" id="number" name="number" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate" class="col-form-label">Start date</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate" class="col-form-label">End date:</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="impact" class="col-form-label">Impact:</label>
+                                <input type="number" class="form-control" id="impact" name="impact" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="scale" class="col-form-label">Scale:</label>
+                                <input type="text" class="form-control" id="scale" name="scale" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label for="active" class="col-form-label">Active:</label>
+                                <input type="text" class="form-control" id="active" name="active" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="description" name="description" value="'default'"/>
+                            </div>
+
+
+                            <!--
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>-->
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="save"/>
+                            <!-- <button type="button" class="btn btn-primary">Send message</button>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Deleting a record!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+
+                        Are you sure?
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="" class="btn btn-danger" id="delRef">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

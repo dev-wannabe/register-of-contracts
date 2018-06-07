@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8"/>
     <title>Register of contract</title>
-    <!--  <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}"/> -->
 
 
     <script type="text/javascript"
@@ -15,8 +14,8 @@
 
 
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}">
+   <!-- <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"/> -->
 
 
 </head>
@@ -26,24 +25,29 @@
 <div class="container"> </br>
 
     <p>
-    <h2><b>Register of contracts</b></h2>
+    <h1>Register of contracts</h1>
     </p>
 
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
 
 
     <p>
-        <a href="/" th:href="@{/}"><big>active contracts</big></a>
+        <a href="/main" th:href="@{/main}"><big>All contracts</big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/}"><big>systems</big></a>
+        <a href="/" th:href="@{/active}"><big>Active contracts</big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/}"><big>about application</big></a>
+        <a href="/" th:href="@{/descriptions}"><big>Systems descriptions</big></a>
+        &nbsp
+        &nbsp
+        <a href="/" th:href="@{/}"><big>About</big></a>
     </p> </br> </br>
 
 
-    <button class="btn btn-success nBtn">New</button>
+    <button class="btn btn-success newBtn">New</button>
+
+
     <div class="card">
         <div class="card-block">
 
@@ -53,12 +57,12 @@
                 <tr>
                     <!-- <th>ID</th> -->
                     <th>Number of contract</th>
-                    <th>Name of system</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Impact</th>
-                    <th>Scale</th>
-                    <th>Active</th>
+                    <th><b>Name of system</b></th>
+                    <th><b>Start date</b></th>
+                    <th><b>End date</b></th>
+                    <th><b>Impact</b></th>
+                    <th><b>Scale</b></th>
+                    <th><b>Active</b></th>
                 </tr>
                 </thead>
 
@@ -66,7 +70,7 @@
                 <!--pokazuje drugi element jeżeli pierwszy jest pusty -->
                 <tr th:each="contract : ${contractList}">
 
-                  <!--  <td th:text="${contract.id}"></td> -->
+                  <!-- <td th:text="${contract.id}"></td> -->
                     <td th:text="${contract.number}"></td>
                     <td th:text="${contract.name}"></td>
                     <td th:text="${contract.startDate}"></td>
@@ -74,22 +78,31 @@
                     <td th:text="${#numbers.formatDecimal (contract.impact, 1, 2) + ' zł'}"></td>
                     <td th:text="${contract.scale}"></td>
                     <td th:text="${contract.active ? 'Yes' : 'No'}"></td>
-                    <td><a th:href="@{getOne/(id=${contract.id})}" class="btn btn-primary eBtn">Edit</a><td>
+
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
+
 
                     <!--<td th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$350</td>
     <td th:text="${#dates.format(product.availableFrom, 'dd-MMM-yyyy')}">28-Jun-2013</td> -->
 
                 </tr>
+
+
                 </tbody>
 
+
             </table>
+
+            <button type="button" class="btn btn-dark csvBtn">Export csv</button>
+            <br/>
             <hr/>
+
 
             <ul class="nav nav-pills">
                 <li class="nav-item"
                     th:each="i : ${#numbers.sequence(0, contractList.totalPages-1)}">
-                    <a th:href="@{/main(page=${i})}" th:text="${i}" class="nav-link"
+                    <a th:href="@{/all(page=${i})}" th:text="${i}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
 
                 </li>
@@ -117,7 +130,6 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                              <!--  <label for="id" class="col-form-label"></label> -->
                                 <input type="hidden" class="form-control" id="id" name="id" value=""/>
                             </div>
 
@@ -147,15 +159,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="active" class="col-form-label">Active:</label>
-                                <input type="text" class="form-control" id="active" name="Active" value="Yes ? No"/>
+                                <input type="text" class="form-control" id="active" name="active" value=""/>
                             </div>
 
-
-                            <!--
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>-->
+                                <input type="hidden" class="form-control" id="description" name="description" value=""/>
+                            </div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -177,7 +187,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="myModalLabel">Deleting a record!</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -185,13 +195,13 @@
                 <div class="modal-body">
                     <p class="alert alert-danger">
 
-                        Are you sure you want to delete?
+                        Are you sure?
 
                     </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href=""   class="btn btn-danger" id="delRef">Delete</a>
+                    <a href="" class="btn btn-danger" id="delRef">Delete</a>
                 </div>
             </div>
         </div>

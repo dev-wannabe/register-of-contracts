@@ -1,9 +1,13 @@
 package pl.devwannabe.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,23 +19,24 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "contracts")
 public class Contract {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
-    @Column(nullable = false, name = "NUMBER_OF_CONTRACT") //unique = true,
+    @Column(nullable = false, name = "number_of_contract") //unique = true,
     private String number;
 
-    @Column(nullable = false, name = "NAME_OF_SYSTEM")
+    @Column(nullable = false, name = "name_of_system")
     private String name;
 
-    @Column(nullable = false, name = "START_DATE")
+    @Column(nullable = false, name = "start_date")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate startDate;
 
-    @Column(nullable = false, name = "END_DATE")
+    @Column(nullable = false, name = "end_date")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate endDate;
 
@@ -43,6 +48,12 @@ public class Contract {
 
     @Column(nullable = false)
     private Boolean active = true;
+
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL)
+    @JoinColumn(name = "description_id")
+    private Description description;
 
     public Contract withId(final Long id) {
         this.id = id;
@@ -86,7 +97,7 @@ public class Contract {
     }
 
     @Override
-    public String toString() {
+    public  String toString() {
         return "ContractEntity{" +
                 "<b>id</b>: " + id +
                 ", <b>number of contract:</b> '   " + number + '\'' +
@@ -99,6 +110,7 @@ public class Contract {
                 '}';
 
     }
+
 
 
 

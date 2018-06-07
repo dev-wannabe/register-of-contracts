@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 
-    $('.nBtn, .table .eBtn').on('click', function(event){
+    $('.newBtn, .table .editBtn').on('click', function(event){
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
@@ -18,6 +18,8 @@ $(document).ready(function(){
             $('.myForm #impact').val(contract.impact)
             $('.myForm #scale').val(contract.scale)
             $('.myForm #active').val(contract.active)
+            $('.myForm #description').val(contract.description)
+
 
         });
 
@@ -31,6 +33,7 @@ $(document).ready(function(){
                         $('.myForm #impact').val('')
                         $('.myForm #scale').val('')
                         $('.myForm #active').val('')
+                        $('.myForm #description').val('')
 
                           $('.myForm #exampleModal').modal();
         }
