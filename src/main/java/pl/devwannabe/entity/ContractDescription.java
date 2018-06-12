@@ -2,12 +2,9 @@ package pl.devwannabe.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 
@@ -17,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "descriptions")
-public class Description {
+public class ContractDescription {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -29,7 +26,7 @@ public class Description {
 
     @Override
     public String toString() {
-        return "Description{" +
+        return "ContractDescription{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';

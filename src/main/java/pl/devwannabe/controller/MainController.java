@@ -1,27 +1,17 @@
 package pl.devwannabe.controller;
 
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.devwannabe.entity.Contract;
-import pl.devwannabe.entity.Description;
+import pl.devwannabe.entity.ContractDescription;
 import pl.devwannabe.repository.ContractRepository;
-import pl.devwannabe.repository.DescriptionRepository;
-
-import javax.management.modelmbean.DescriptorSupport;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
+import pl.devwannabe.repository.ContractDescriptionRepository;
 
 @Controller
 public class MainController {
@@ -29,7 +19,7 @@ public class MainController {
     @Autowired
     private ContractRepository contractRepository;
     @Autowired
-    private DescriptionRepository descriptionRepository;
+    private ContractDescriptionRepository contractDescriptionRepository;
 
 
 
@@ -49,45 +39,36 @@ public class MainController {
         return "active contracts";
     }
 
-    @GetMapping("/descriptions")
+    @GetMapping("/description")
     public String showWithDescriptions(Model model, @RequestParam(defaultValue = "0") int page) {
         model.addAttribute("contractList", contractRepository
-                .findAll(PageRequest.of(page, 5)));
-        model.addAttribute("descriptionList", descriptionRepository
-                .findAll(PageRequest.of(page, 5)));
-        model.addAttribute("currentPage", page);
-        return "descriptions";
+                .findAll(PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
+        return "description";
     }
 
     @Transactional
-    @PostMapping("/save")
-    public String create(Contract contract, Description description) {
-
-        contract.setDescription(description);
+    @PostMapping("/create")
+    public String create(Contract contract, ContractDescription contractDescription) {
+        contractDescription.setDescription("No description available, yet");
+        contract.setDescription(contractDescription);
         contractRepository.save(contract);
-        descriptionRepository.save(description);
-
         return "redirect:/main";
     }
 
-   // @Transactional
-    @PutMapping("/saveDescription")
-    public String saveDescription(Description description) {
-
-
-       // description.setDescription();
-       // descriptionRepository.save(description);
-
-
-
-        return "redirect:/descriptions";
+    @Transactional
+    @PostMapping("/saveDescription")
+    public String saveDescription(Contract contract, ContractDescription contractDescription) {
+        //@ModelAttribute("myForm")
+        contract.setDescription(contractDescription);
+        contractRepository.save(contract);
+       // contractDescriptionRepository.save(contractDescription);
+        return "redirect:/description";
     }
 
     @Transactional
     @GetMapping("/delete")
     public String delete(Long id) {
         contractRepository.deleteById(id);
-       // descriptionRepository.deleteById(id);
         return "redirect:/main";
     }
 
@@ -99,12 +80,15 @@ public class MainController {
 
     @GetMapping("/getOneDescription")
     @ResponseBody
-    public Description getOneDescription(Long id) {
-        return descriptionRepository.getOne(id);
+    public Contract getOneDescription(Long id) {
+        return contractRepository.getOneByDescription(id);
     }
 
-
-
+//    @RequestMapping(value = "/download", method = RequestMethod.GET)
+//    public String download(Model model) {
+//        model.addAttribute("contracts", contractRepository.findAll());
+//        return "";
+//    }
 
 
 

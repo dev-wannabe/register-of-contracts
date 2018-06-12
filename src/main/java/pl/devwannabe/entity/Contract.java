@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -50,10 +47,10 @@ public class Contract {
     private Boolean active = true;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
             cascade =  CascadeType.ALL)
     @JoinColumn(name = "description_id")
-    private Description description;
+    private ContractDescription description;
 
     public Contract withId(final Long id) {
         this.id = id;

@@ -18,7 +18,7 @@ $(document).ready(function(){
             $('.myForm #impact').val(contract.impact)
             $('.myForm #scale').val(contract.scale)
             $('.myForm #active').val(contract.active)
-            $('.myForm #description').val(contract.description)
+            $('.myForm #description').val(contract.descriptions)
 
 
         });

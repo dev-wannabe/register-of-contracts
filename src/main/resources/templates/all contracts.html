@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}">
-   <!-- <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"/> -->
 
 
 </head>
@@ -38,10 +37,7 @@
         <a href="/" th:href="@{/active}"><big>Active contracts</big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/descriptions}"><big>Systems descriptions</big></a>
-        &nbsp
-        &nbsp
-        <a href="/" th:href="@{/}"><big>About</big></a>
+        <a href="/" th:href="@{/description}"><big>Systems description</big></a>
     </p> </br> </br>
 
 
@@ -51,11 +47,9 @@
     <div class="card">
         <div class="card-block">
 
-            <!-- class="table table-striped table-bordered table-condensed table-hover">-->
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <!-- <th>ID</th> -->
                     <th>Number of contract</th>
                     <th><b>Name of system</b></th>
                     <th><b>Start date</b></th>
@@ -70,7 +64,6 @@
                 <!--pokazuje drugi element jeżeli pierwszy jest pusty -->
                 <tr th:each="contract : ${contractList}">
 
-                  <!-- <td th:text="${contract.id}"></td> -->
                     <td th:text="${contract.number}"></td>
                     <td th:text="${contract.name}"></td>
                     <td th:text="${contract.startDate}"></td>
@@ -95,6 +88,9 @@
             </table>
 
             <button type="button" class="btn btn-dark csvBtn">Export csv</button>
+            <button type="button" class="btn btn-dark pdfBtn">Export pdf</button>
+
+            <!--<td><a th:href="@{/download}" class="btn btn-primary editBtn">Edit</a><td>-->
             <br/>
             <hr/>
 
@@ -102,7 +98,7 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"
                     th:each="i : ${#numbers.sequence(0, contractList.totalPages-1)}">
-                    <a th:href="@{/all(page=${i})}" th:text="${i}" class="nav-link"
+                    <a th:href="@{/main(page=${i})}" th:text="${i}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
 
                 </li>
@@ -115,7 +111,7 @@
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA EDIT--------->
 
     <div class="myForm">
-        <form th:action="@{/save}" method="post">
+        <form th:action="@{/create}" method="post">
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
@@ -162,16 +158,16 @@
                                 <input type="text" class="form-control" id="active" name="active" value=""/>
                             </div>
 
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="description" name="description" value=""/>
-                            </div>
+                                  <!--<div class="form-group">-->
+                                      <!--<input type="hidden" class="form-control" id="description" name="description" value=""/>-->
+                                  <!--</div>-->
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" value="save"/>
-                            <!-- <button type="button" class="btn btn-primary">Send message</button>-->
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <input type="submit" class="btn btn-primary" value="save"/>
+                                  <!-- <button type="button" class="btn btn-primary">Send message</button>-->
                         </div>
                     </div>
                 </div>
@@ -180,6 +176,15 @@
         </form>
 
     </div>
+
+
+
+
+
+
+
+
+
 
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

@@ -4,21 +4,21 @@
 
 $(document).ready(function(){
 
-    $('.table .editBtn').on('click', function(event){
+    $('.table .editDescBtn').on('click', function(event){
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
         if(text=='Edit'){
-        $.get(href, function(description, status){
-            $('.myForm #id').val(description.id)
-            $('.myForm #description').val(description.description)
+        $.get(href, function(contract, status){
+            $('.myForm #id').val(contract.description.id)
+            $('.myForm #description').val(contract.description.description)
 
         });
 
         $('.myForm #exampleModal').modal();
         }else{
             $('.myForm #id').val()
- //                       $('.myForm #name').val()
+//                        $('.myForm #name').val()
 //                        $('.myForm #startDate').val()
 //                        $('.myForm #endDate').val()
                         $('.myForm #id').val('')
