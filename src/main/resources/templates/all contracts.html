@@ -5,17 +5,14 @@
     <meta charset="utf-8"/>
     <title>Register of contract</title>
 
-
     <script type="text/javascript"
             src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
-
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" th:href="@{/css/main.css}">
-
 
 </head>
 
@@ -29,20 +26,17 @@
 
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
 
-
     <p>
-        <a href="/main" th:href="@{/main}"><big>All contracts</big></a>
+        <a href="/" th:href="@{/all-contracts}"><big>All contracts</big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/active}"><big>Active contracts</big></a>
+        <a href="/" th:href="@{/active-contracts}"><big>Active contracts</big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/description}"><big>Systems description</big></a>
+        <a href="/" th:href="@{/descriptions}"><big>Systems description</big></a>
     </p> </br> </br>
 
-
     <button class="btn btn-success newBtn">New</button>
-
 
     <div class="card">
         <div class="card-block">
@@ -60,9 +54,8 @@
                 </tr>
                 </thead>
 
-                <tbody> <!-- th:remove="all-but-first">
-                <!--pokazuje drugi element jeżeli pierwszy jest pusty -->
-                <tr th:each="contract : ${contractList}">
+                <tbody>
+                <tr th:each="contract : ${contractsList}">
 
                     <td th:text="${contract.number}"></td>
                     <td th:text="${contract.name}"></td>
@@ -75,7 +68,6 @@
                     <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
 
-
                     <!--<td th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$350</td>
     <td th:text="${#dates.format(product.availableFrom, 'dd-MMM-yyyy')}">28-Jun-2013</td> -->
 
@@ -84,34 +76,24 @@
 
                 </tbody>
 
-
             </table>
-
-            <button type="button" class="btn btn-dark csvBtn">Export csv</button>
-            <button type="button" class="btn btn-dark pdfBtn">Export pdf</button>
-
-            <!--<td><a th:href="@{/download}" class="btn btn-primary editBtn">Edit</a><td>-->
-            <br/>
-            <hr/>
-
 
             <ul class="nav nav-pills">
                 <li class="nav-item"
-                    th:each="i : ${#numbers.sequence(0, contractList.totalPages-1)}">
-                    <a th:href="@{/main(page=${i})}" th:text="${i}" class="nav-link"
+                    th:each="i : ${#numbers.sequence(0, contractsList.totalPages-1)}">
+                    <a th:href="@{/all-contracts(page=${i})}" th:text="${i}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
 
                 </li>
             </ul>
-
 
         </div>
     </div>
 
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA EDIT--------->
 
-    <div class="myForm">
-        <form th:action="@{/create}" method="post">
+    <div class="editForm">
+        <form th:action="@{/saveContract}" method="post">
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
@@ -157,17 +139,16 @@
                                 <label for="active" class="col-form-label">Active:</label>
                                 <input type="text" class="form-control" id="active" name="active" value=""/>
                             </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="description" name="description" value=""/>
+                            </div>
 
-                                  <!--<div class="form-group">-->
-                                      <!--<input type="hidden" class="form-control" id="description" name="description" value=""/>-->
-                                  <!--</div>-->
 
-
-                              </div>
-                              <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <input type="submit" class="btn btn-primary" value="save"/>
-                                  <!-- <button type="button" class="btn btn-primary">Send message</button>-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="save"/>
+                            <!-- <button type="button" class="btn btn-primary">Send message</button>-->
                         </div>
                     </div>
                 </div>
@@ -176,14 +157,6 @@
         </form>
 
     </div>
-
-
-
-
-
-
-
-
 
 
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->

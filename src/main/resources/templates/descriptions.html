@@ -32,17 +32,14 @@
 
 
     <p>
-        <a href="/main" th:href="@{/all-contracts}"><big>All contracts</big></a>
+        <a href="/" th:href="@{/all-contracts}"><big>All contracts</big></a>
         &nbsp
         &nbsp
         <a href="/" th:href="@{/active-contracts}"><big>Active contracts</big></a>
         &nbsp
         &nbsp
         <a href="/" th:href="@{/descriptions}"><big>Systems description</big></a>
-
     </p> </br> </br>
-
-
 
 
     <div class="card">
@@ -52,48 +49,37 @@
                 <thead>
                 <tr>
 
-                    <th>Number of contract</th>
                     <th><b>Name of system</b></th>
                     <th><b>Start date</b></th>
                     <th><b>End date</b></th>
-                    <th><b>Impact</b></th>
-                    <th><b>Scale</b></th>
-                    <th><b>Active</b></th>
+                    <th><b>Description</b></th>
+
                 </tr>
                 </thead>
 
-                <tbody> <!-- th:remove="all-but-first">
-                   pokazuje drugi element jeżeli pierwszy jest pusty -->
+                <tbody>
+
+
                 <tr th:each="contract : ${contractsList}">
 
-
-                    <td th:text="${contract.number}"></td>
-                    <td th:text="${contract.name}"></td>
-                    <td th:text="${contract.startDate}"></td>
-                    <td th:text="${contract.endDate}"></td>
-                    <td th:text="${#numbers.formatDecimal (contract.impact, 1, 2) + ' zł'}"></td>
-                    <td th:text="${contract.scale}"></td>
-                    <td th:text="${contract.active ? 'Yes' : 'No'}"></td>
+                    <td width="20%" th:text="${contract.name}"></td>
+                    <td width="20%" th:text="${contract.startDate}"></td>
+                    <td width="20%" th:text="${contract.endDate}"></td>
+                    <td width="60%" th:text="${contract.description}"></td>
                     <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
                     <td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
-
-
-                    <!--<td th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$350</td>
-    <td th:text="${#dates.format(product.availableFrom, 'dd-MMM-yyyy')}">28-Jun-2013</td> -->
 
                 </tr>
 
 
                 </tbody>
-
-
             </table>
 
             <ul class="nav nav-pills">
                 <li class="nav-item"
                     th:each="i : ${#numbers.sequence(0, contractsList.totalPages -1)}">
-                    <a th:href="@{/active-contracts(page=${i})}" th:text="${i}" class="nav-link"
+                    <a th:href="@{/descriptions(page=${i})}" th:text="${i}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
 
                 </li>
@@ -106,7 +92,7 @@
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA EDIT--------->
 
     <div class="editForm">
-        <form th:action="@{/saveContract}" method="post">
+        <form th:action="@{/saveDescription}" method="post">
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
@@ -121,58 +107,45 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="id" name="id" value=""/>
+                                <label for="description" class="col-form-label">Description:</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                             </div>
-
+                            <!--     <div class="form-group">
+                                     <label for="description" class="col-form-label">Description:</label>
+                                     <input type="text" class="form-control" id="description" name="description" value=""/>
+                            </div> -->
                             <div class="form-group">
-                                <label for="number" class="col-form-label">Number:</label>
-                                <input type="text" class="form-control" id="number" name="number" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <label for="startDate" class="col-form-label">Start date</label>
-                                <input type="date" class="form-control" id="startDate" name="startDate" value=""/>
+                                <input type="hidden" class="form-control" id="number" name="number" value=""/>
                             </div>
                             <div class="form-group">
-                                <label for="endDate" class="col-form-label">End date:</label>
-                                <input type="date" class="form-control" id="endDate" name="endDate" value=""/>
+                                <input type="hidden" class="form-control" id="name" name="name" value=""/>
                             </div>
                             <div class="form-group">
-                                <label for="impact" class="col-form-label">Impact:</label>
-                                <input type="number" class="form-control" id="impact" name="impact" value=""/>
+                                <input type="hidden" class="form-control" id="startDate" name="startDate" value=""/>
                             </div>
                             <div class="form-group">
-                                <label for="scale" class="col-form-label">Scale:</label>
-                                <input type="text" class="form-control" id="scale" name="scale" value=""/>
+                                <input type="hidden" class="form-control" id="endDate" name="endDate" value=""/>
                             </div>
                             <div class="form-group">
-                                <label for="active" class="col-form-label">Active:</label>
-                                <input type="text" class="form-control" id="active" name="active" value=""/>
+                                <input type="hidden" class="form-control" id="impact" name="impact" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="description" name="description" value=""/>
+                                <input type="hidden" class="form-control" id="scale" name="scale" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="active" name="active" value="Yes ? No"/>
                             </div>
 
 
-                            <!--
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>-->
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" value="save"/>
-                            <!-- <button type="button" class="btn btn-primary">Send message</button>-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="save"/>
+                                <!-- <button type="button" class="btn btn-primary">Send message</button>-->
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
         </form>
 
     </div>

@@ -10,32 +10,31 @@ $(document).ready(function(){
         var text = $(this).text();
         if(text=='Edit'){
         $.get(href, function(contract, status){
-            $('.myForm #id').val(contract.id)
-            $('.myForm #number').val(contract.number)
-            $('.myForm #name').val(contract.name)
-            $('.myForm #startDate').val(contract.startDate)
-            $('.myForm #endDate').val(contract.endDate)
-            $('.myForm #impact').val(contract.impact)
-            $('.myForm #scale').val(contract.scale)
-            $('.myForm #active').val(contract.active)
-            $('.myForm #description').val(contract.descriptions)
-
-
+            $('.editForm #id').val(contract.id)
+            $('.editForm #number').val(contract.number)
+            $('.editForm #name').val(contract.name)
+            $('.editForm #startDate').val(contract.startDate)
+            $('.editForm #endDate').val(contract.endDate)
+            $('.editForm #impact').val(contract.impact)
+            $('.editForm #scale').val(contract.scale)
+            $('.editForm #active').val(contract.active)
+            $('.editForm #description').val(contract.description)
         });
 
-        $('.myForm #exampleModal').modal();
+        $('.editForm #exampleModal').modal();
         }else{
-            $('.myForm #id').val()
-                        $('.myForm #number').val('')
-                        $('.myForm #name').val('')
-                        $('.myForm #startDate').val('')
-                        $('.myForm #endDate').val('')
-                        $('.myForm #impact').val('')
-                        $('.myForm #scale').val('')
-                        $('.myForm #active').val('')
-                        $('.myForm #description').val('')
+            $('.editForm #id').val('')
 
-                          $('.myForm #exampleModal').modal();
+                        $('.editForm #number').val('')
+                        $('.editForm #name').val('')
+                        $('.editForm #startDate').val('')
+                        $('.editForm #endDate').val('')
+                        $('.editForm #impact').val('')
+                        $('.editForm #scale').val('')
+                        $('.editForm #active').val('')
+                        $('.editForm #description').val('No description available, yet')
+
+                          $('.editForm #exampleModal').modal();
         }
     });
 
