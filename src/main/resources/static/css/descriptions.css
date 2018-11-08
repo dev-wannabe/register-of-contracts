@@ -11,12 +11,14 @@
   color: white;
   }
 
-.csvBtn {
-float: right;
-margin-right: 23px;
-}
+  table {
 
-.pdfBtn {
-float: right;
-margin-right: 23px;
-}
+table-layout: Fixed;
+ width:100%;
+
+  }
+
+ table td {
+ word-wrap:break-word;
+
+  }

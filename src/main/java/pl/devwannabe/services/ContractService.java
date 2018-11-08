@@ -22,4 +22,17 @@ public class ContractService {
         Page<Contract> activeContracts = contractRepository.findByActive(active, pageRequest);
         return activeContracts;
     }
+
+    public void save(Contract contract) {
+        contractRepository.save(contract);
+    }
+
+    public void deleteById(Long id) {
+        contractRepository.deleteById(id);
+    }
+
+    public Contract getOne(Long id) {
+       return contractRepository.getOne(id);
+    }
+
 }
