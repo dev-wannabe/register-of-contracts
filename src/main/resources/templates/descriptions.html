@@ -26,7 +26,6 @@
 
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
 
-
     <p>
         <a href="/" th:href="@{/all-contracts}"><big>All contracts</big></a>
         &nbsp
@@ -57,10 +56,10 @@
 
                 <tr th:each="contract : ${contractsList}">
 
-                    <td th:utext="${contract.name}">name</td>
-                    <td th:utext="${contract.startDate}" >startDate</td>
-                    <td th:utext="${contract.endDate}" >endDate</td>
-                    <td th:utext=${contract.description} >description</td>
+                    <td th:utext="${#strings.escapeXml(contract.name)}">name</td>
+                    <td th:utext="${#strings.escapeXml(contract.startDate)}" >startDate</td>
+                    <td th:utext="${#strings.escapeXml(contract.endDate)}" >endDate</td>
+                    <td th:utext=${#strings.escapeXml(contract.description)} >description</td>
                     <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
 
@@ -142,6 +141,7 @@
     </div>
 
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -153,11 +153,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <p class="alert alert-danger">
-
                         Are you sure?
-
                     </p>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

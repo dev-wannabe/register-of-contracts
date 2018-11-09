@@ -57,13 +57,13 @@
                 <tbody>
                 <tr th:each="contract : ${contractsList}">
 
-                    <td th:text="${contract.number}"></td>
-                    <td th:text="${contract.name}"></td>
-                    <td th:text="${contract.startDate}"></td>
-                    <td th:text="${contract.endDate}"></td>
-                    <td th:text="${#numbers.formatDecimal (contract.impact, 1, 2) + ' zł'}"></td>
-                    <td th:text="${contract.scale}"></td>
-                    <td th:text="${contract.active ? 'Yes' : 'No'}"></td>
+                    <td th:utext="${#strings.escapeXml(contract.number)}">number</td>
+                    <td th:utext="${#strings.escapeXml(contract.name)}">name</td>
+                    <td th:utext="${#strings.escapeXml(contract.startDate)}" >startDate</td>
+                    <td th:utext="${#strings.escapeXml(contract.endDate)}" >endDate</td>
+                    <td th:utext="${#strings.escapeXml(#numbers.formatDecimal (contract.impact, 1, 2) + ' zł')}">impact</td>
+                    <td th:utext="${#strings.escapeXml(contract.scale)}">scale</td>
+                    <td th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active</td>
 
                     <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
@@ -153,8 +153,8 @@
 
     </div>
 
-
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
