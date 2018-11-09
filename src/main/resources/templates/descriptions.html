@@ -45,10 +45,10 @@
                 <thead>
                 <tr>
 
-                    <th><b>Name of system</b></th>
-                    <th><b>Start date</b></th>
-                    <th><b>End date</b></th>
-                    <th><b>Description</b></th>
+                    <th class="name"><b>Name of system</b></th>
+                    <th class="startDate"><b>Start date</b></th>
+                    <th class="endDate"><b>End date</b></th>
+                    <th class="description"><b>Description</b></th>
 
                 </tr>
                 </thead>
@@ -57,19 +57,14 @@
 
                 <tr th:each="contract : ${contractsList}">
 
-                    <td width="20%" th:text="${contract.name}" class="name">name</td>
-                    <td width="20%" th:text="${contract.startDate}" class="startDate">startDate</td>
-                    <td width="20%" th:text="${contract.endDate}" class="endDate">endDate</td>
-                    <td width="60%" th:utext="${contract.description}" class="description">description</td>
-                    <!--  <td width="60%"th:utext="${#strings.replace( #strings.escapeXml( th:text="${contract.description}"), T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"></td>-->
-                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
-                    <td>
+                    <td th:utext="${contract.name}">name</td>
+                    <td th:utext="${contract.startDate}" >startDate</td>
+                    <td th:utext="${contract.endDate}" >endDate</td>
+                    <td th:utext=${contract.description} >description</td>
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
 
-                    <!--   th:utext="${#strings.replace( #strings.escapeXml( text ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"-->
-
                 </tr>
-
 
                 </tbody>
             </table>
@@ -131,7 +126,7 @@
 
                             <div class="form-group">
                                 <label for="description" class="col-form-label">Description:</label>
-                                <textarea class="form-control" id="description" name="description" rows="6"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="12"></textarea>
                             </div>
 
                             <div class="modal-footer">

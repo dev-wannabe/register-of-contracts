@@ -68,9 +68,6 @@
                     <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
 
-                    <!--<td th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$350</td>
-    <td th:text="${#dates.format(product.availableFrom, 'dd-MMM-yyyy')}">28-Jun-2013</td> -->
-
                 </tr>
 
 
@@ -147,7 +144,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <input type="submit" class="btn btn-primary" value="save"/>
-                            <!-- <button type="button" class="btn btn-primary">Send message</button>-->
                         </div>
                     </div>
                 </div>

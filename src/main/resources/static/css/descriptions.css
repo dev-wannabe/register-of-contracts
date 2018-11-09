@@ -7,18 +7,36 @@
  color: white;
  }
 
- h1  {
+ h1 {
   color: white;
   }
 
-  table {
+ table {
+ table-layout: fixed;
+ }
 
-table-layout: Fixed;
- width:100%;
+ .name {
+ width: 15%;
+ }
 
-  }
+ .startDate {
+ width: 15%;
+ }
 
- table td {
- word-wrap:break-word;
+ .endDate {
+ width: 15%;
+ }
 
-  }
+ .description {
+ width: 30%;
+ }
+
+ .editBtn {
+ float: right;
+ margin-right: -37px;
+ }
+
+ .delBtn {
+ float: right;
+ margin-right: 16px;
+ }
