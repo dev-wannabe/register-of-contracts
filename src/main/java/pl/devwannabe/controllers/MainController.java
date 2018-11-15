@@ -40,7 +40,6 @@ public class MainController {
 
     @PostMapping("/saveContract")
     public String saveContract(Contract contract) {
-        contractService.save(contract);
         return "redirect:/all-contracts";
     }
 

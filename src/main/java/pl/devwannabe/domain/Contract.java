@@ -8,9 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
 
 @Data
 @Entity
@@ -24,29 +24,31 @@ public class Contract {
     @Id
     private Long id;
 
-    @Column(nullable = false, name = "number_of_contract") //unique = true,
+    @Size(min = 1, max = 50, message = "Number of the contract have to contain from 1 to 50 characters.")
+    @Column(nullable = false, unique = true, name = "number_of_contract")
     private String number;
 
+    @Size(min = 1, max = 50, message = "Name of the contract have to contain from 1 to 50 characters.")
     @Column(nullable = false, name = "name_of_system")
     private String name;
 
-    @Column(nullable = false, name = "start_date")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @Column(nullable = false, name = "end_date")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
     private BigDecimal impact;
 
     @Column(nullable = false)
-    private String scale;
+    private int daysLeft;
 
     @Column(nullable = false)
     private Boolean active = true;
-@Valid()
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 

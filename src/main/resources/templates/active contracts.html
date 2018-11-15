@@ -51,13 +51,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Number of contract</th>
-                    <th><b>Name of system</b></th>
-                    <th><b>Start date</b></th>
-                    <th><b>End date</b></th>
-                    <th><b>Impact</b></th>
-                    <th><b>Scale</b></th>
-                    <th><b>Active</b></th>
+                    <th class="number">Number of contract</th>
+                    <th class="name">Name of system</th>
+                    <th class="startDate">Start date</th>
+                    <th class="endDate">End date</th>
+                    <th class="impact">Impact</th>
+                    <th class="daysLeft">Days left</th>
+                    <th class="active">Active</th>
                 </tr>
                 </thead>
 
@@ -70,8 +70,8 @@
                     <td th:utext="${#strings.escapeXml(contract.startDate)}" >startDate</td>
                     <td th:utext="${#strings.escapeXml(contract.endDate)}" >endDate</td>
                     <td th:utext="${#strings.escapeXml(#numbers.formatDecimal (contract.impact, 1, 2) + ' zł')}">impact</td>
-                    <td th:utext="${#strings.escapeXml(contract.scale)}">scale</td>
-                    <td th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active</td>
+                    <td class="daysLeftContent" th:utext="${#strings.escapeXml(contract.daysLeft)}">days left</td>
+                    <td class="activeContent" th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active</td>
                     <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
                     <td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
@@ -120,11 +120,11 @@
 
                             <div class="form-group">
                                 <label for="number" class="col-form-label">Number:</label>
-                                <input type="text" class="form-control" id="number" name="number" value=""/>
+                                <input type="text" minlength="1" maxlength="50" class="form-control" id="number" name="number" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" value=""/>
+                                <input type="text" minlength="1" maxlength="50" class="form-control" id="name" name="name" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="startDate" class="col-form-label">Start date</label>
@@ -136,11 +136,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="impact" class="col-form-label">Impact:</label>
-                                <input type="number" class="form-control" id="impact" name="impact" value=""/>
+                                <input type="number" min="0.00" max="99000000.99" step="0.01" class="form-control" id="impact" name="impact" value=""/>
                             </div>
                             <div class="form-group">
-                                <label for="scale" class="col-form-label">Scale:</label>
-                                <input type="text" class="form-control" id="scale" name="scale" value=""/>
+                                <label for="daysLeft" class="col-form-label">Days Left:</label>
+                                <input type="text" class="form-control" id="daysLeft" name="daysLeft" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="active" class="col-form-label">Active:</label>
@@ -150,18 +150,11 @@
                                 <input type="hidden" class="form-control" id="description" name="description" value=""/>
                             </div>
 
-
-                            <!--
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>-->
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <input type="submit" class="btn btn-primary" value="save"/>
-                            <!-- <button type="button" class="btn btn-primary">Send message</button>-->
+
                         </div>
                     </div>
                 </div>
@@ -172,6 +165,7 @@
     </div>
 
     <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

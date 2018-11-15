@@ -10,3 +10,57 @@
  h1  {
   color: white;
   }
+
+  table {
+   table-layout: fixed;
+   }
+
+   .number {
+   width: 16%;
+   }
+
+   .name {
+   width: 14%;
+   }
+
+   .startDate {
+   width: 10%;
+   }
+
+   .endDate {
+   width: 10%;
+
+   }
+
+   .impact {
+   width: 13%;
+   }
+
+   .daysLeft {
+   width: 10%;
+   text-align:center;
+   }
+
+   .daysLeftContent {
+   text-align:center;
+   }
+
+   .active {
+   width: 10%;
+   text-align:center;
+
+   }
+
+   .activeContent {
+   text-align:center;
+   }
+
+   .editBtn {
+   float: right;
+   margin-right: -20px;
+   }
+
+   .delBtn {
+   float: right;
+   margin-right: 16px;
+   }

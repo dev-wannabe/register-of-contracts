@@ -16,7 +16,7 @@ $(document).ready(function(){
             $('.editForm #startDate').val(contract.startDate)
             $('.editForm #endDate').val(contract.endDate)
             $('.editForm #impact').val(contract.impact)
-            $('.editForm #scale').val(contract.scale)
+            $('.editForm #daysLeft').val(contract.daysLeft)
             $('.editForm #active').val(contract.active)
             $('.editForm #description').val(contract.description)
         });
@@ -30,7 +30,7 @@ $(document).ready(function(){
                         $('.editForm #startDate').val('')
                         $('.editForm #endDate').val('')
                         $('.editForm #impact').val('')
-                        $('.editForm #scale').val('')
+                        $('.editForm #daysLeft').val('')
                         $('.editForm #active').val('')
                         $('.editForm #description').val('No description available, yet')
 
