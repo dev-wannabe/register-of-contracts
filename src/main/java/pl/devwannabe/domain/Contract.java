@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.devwannabe.validation.UniqueNumber;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ public class Contract {
 
     @Size(min = 1, max = 50, message = "Number of the contract have to contain from 1 to 50 characters.")
     @Column(nullable = false, unique = true, name = "number_of_contract")
+    @UniqueNumber(message="Such number already exists!")
     private String number;
 
     @Size(min = 1, max = 50, message = "Name of the contract have to contain from 1 to 50 characters.")

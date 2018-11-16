@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.devwannabe.domain.Contract;
 import pl.devwannabe.services.ContractService;
+import pl.devwannabe.validation.ContractValidator;
+
+import javax.validation.Valid;
 
 @Controller
 public class MainController {
@@ -39,7 +44,12 @@ public class MainController {
     }
 
     @PostMapping("/saveContract")
-    public String saveContract(Contract contract) {
+    @Transactional
+    public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
+        if (ContractValidator.errorsAround(contract, bindingResult)) {
+            return "redirect:/all-contracts";
+        }
+        contractService.save(contract);
         return "redirect:/all-contracts";
     }
 
