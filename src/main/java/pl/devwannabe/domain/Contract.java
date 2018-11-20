@@ -8,15 +8,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import pl.devwannabe.validation.UniqueNumber;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
 @Entity
+@Table(name = "contracts")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "contracts")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contract {
 
@@ -24,38 +25,38 @@ public class Contract {
     @Id
     private Long id;
 
-    @Size(min = 1, max = 50, message = "Number of the contract have to contain from 1 to 50 characters.")
     @Column(nullable = false, unique = true, name = "number_of_contract")
+    @Size(min = 1, max = 50, message = "Number of the contract have to contain from 1 to 50 characters.")
     @UniqueNumber(message="Such number already exists!")
+    @NotNull
     private String number;
 
-    @Size(min = 1, max = 50, message = "Name of the contract have to contain from 1 to 50 characters.")
     @Column(nullable = false, name = "name_of_system")
+    @Size(min = 1, max = 50, message = "Name of the contract have to contain from 1 to 50 characters.")
+    @NotNull
     private String name;
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "The start date can not be empty")
     private LocalDate startDate;
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "The end date can not be empty")
     private LocalDate endDate;
 
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
+    @NotNull(message = "The impact can not be empty")
     private BigDecimal impact;
 
     @Column(nullable = false)
-    private int daysLeft;
+    private Integer daysLeft;
 
     @Column(nullable = false)
-    private Boolean active = true;
+    private Boolean active;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
-
-    //TODO
-    public boolean isActive(LocalDate startDate, LocalDate endDate) {
-        return true;
-    }
 
 }

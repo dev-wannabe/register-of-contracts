@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import pl.devwannabe.domain.Contract;
 import pl.devwannabe.domain.ContractRepository;
-import pl.devwannabe.validation.ContractValidator;
 
-import javax.validation.Valid;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Service
 public class ContractService {
@@ -32,7 +32,9 @@ public class ContractService {
         return contractRepository.findByNumber(ContractNumber);
     }
 
-    public void save(@Valid Contract contract) {
+    public void save(Contract contract) {
+        contract.setActive(isActive(contract));
+        contract.setDaysLeft(calculateDaysLeft(contract));
         contractRepository.save(contract);
     }
 
@@ -42,6 +44,19 @@ public class ContractService {
 
     public Contract getOne(Long id) {
         return contractRepository.getOne(id);
+    }
+
+    private int calculateDaysLeft(Contract contract) {
+        int days;
+        if (contract.getStartDate().isBefore(contract.getEndDate())) {
+            days = Period.between(contract.getStartDate(), contract.getEndDate()).getDays();
+            return days;
+        }
+        return 0;
+    }
+
+    private boolean isActive(Contract contract) {
+        return LocalDate.now().isBefore(contract.getEndDate());
     }
 
 }

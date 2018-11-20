@@ -22,9 +22,9 @@ $(document).ready(function(){
         });
 
         $('.editForm #exampleModal').modal();
-        }else{
-            $('.editForm #id').val('')
+        } else {
 
+                        $('.editForm #id').val('')
                         $('.editForm #number').val('')
                         $('.editForm #name').val('')
                         $('.editForm #startDate').val('')
@@ -33,8 +33,7 @@ $(document).ready(function(){
                         $('.editForm #daysLeft').val('')
                         $('.editForm #active').val('')
                         $('.editForm #description').val('No description available, yet')
-
-                          $('.editForm #exampleModal').modal();
+                        $('.editForm #exampleModal').modal();
         }
     });
 

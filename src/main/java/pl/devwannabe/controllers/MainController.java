@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.devwannabe.domain.Contract;
 import pl.devwannabe.services.ContractService;
-import pl.devwannabe.validation.ContractValidator;
 
 import javax.validation.Valid;
 
@@ -46,11 +45,19 @@ public class MainController {
     @PostMapping("/saveContract")
     @Transactional
     public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
-        if (ContractValidator.errorsAround(contract, bindingResult)) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("************  There were errors  ***********");
+            bindingResult.getAllErrors().forEach(error -> {
+                        System.out.println(error.getObjectName() +
+                                " " + error.getDefaultMessage());
+                    }
+            );
+            return "redirect:/all-contracts";
+        } else {
+            contractService.save(contract);
             return "redirect:/all-contracts";
         }
-        contractService.save(contract);
-        return "redirect:/all-contracts";
+
     }
 
     @PostMapping("/saveDescription")
