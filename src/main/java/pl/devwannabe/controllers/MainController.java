@@ -52,7 +52,7 @@ public class MainController {
                                 " " + error.getDefaultMessage());
                     }
             );
-            return "redirect:/all-contracts";
+            return "errors";
         } else {
             contractService.save(contract);
             return "redirect:/all-contracts";
