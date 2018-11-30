@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import pl.devwannabe.domain.Contract;
 import pl.devwannabe.domain.ContractRepository;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -17,6 +16,9 @@ public class ContractService {
     @Autowired
     private ContractRepository contractRepository;
 
+    public static void printBlue(Object input) {
+        System.out.println("\u001B[34m" + input + "\u001B[0m");
+    }
 
     public Page<Contract> getAllContracts(PageRequest pageRequest) {
         Page<Contract> allContracts = contractRepository.findAll(pageRequest);
@@ -49,7 +51,7 @@ public class ContractService {
     private int calculateDaysLeft(Contract contract) {
         int days;
         if (contract.getStartDate().isBefore(contract.getEndDate())) {
-            days = Period.between(contract.getStartDate(), contract.getEndDate()).getDays();
+            days = Period.between(LocalDate.now(), contract.getEndDate()).getDays();
             return days;
         }
         return 0;

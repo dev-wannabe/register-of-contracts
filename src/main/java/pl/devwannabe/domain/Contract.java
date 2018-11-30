@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.devwannabe.validation.UniqueNumber;
+import pl.devwannabe.validation.Unique;
+import pl.devwannabe.validation.ValidateGroupFirst;
+import pl.devwannabe.validation.ValidateGroupSecond;
 
 import javax.persistence.*;
+import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -18,17 +21,19 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@GroupSequence({Contract.class, ValidateGroupFirst.class, ValidateGroupSecond.class})
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contract {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Unique(groups = ValidateGroupFirst.class, message = "Such id already exists!")
     private Long id;
 
     @Column(nullable = false, unique = true, name = "number_of_contract")
     @Size(min = 1, max = 50, message = "Number of the contract have to contain from 1 to 50 characters.")
-    @UniqueNumber(message="Such number already exists!")
     @NotNull
+    @Unique(groups = ValidateGroupSecond.class, message="Such number already exists!")
     private String number;
 
     @Column(nullable = false, name = "name_of_system")

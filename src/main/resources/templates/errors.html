@@ -26,38 +26,37 @@
     <form class="form-horizontal" th:object="${contract}" th:action="@{/saveContract}" th:method="post">
 
         <div class="form-group">
+            <input type="hidden" class="form-control" th:field="*{id}"/>
+        </div>
+
+        <div class="form-group">
             <label class="control-label">Number:</label>
             <input type="text" class="form-control" th:field="*{number}"/>
             <p class="error" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">error</p>
-            <span class="ok" th:unless="${#fields.hasErrors('number')}">OK</span>
         </div>
 
         <div class="form-group">
             <label class="control-label">Name:</label>
             <input type="text" class="form-control" th:field="*{name}"/>
-            <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" : >error</p>
-            <span class="ok" th:unless="${#fields.hasErrors('name')}">OK</span>
+            <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</p>
         </div>
 
         <div class="form-group">
             <label class="control-label">Start Date:</label>
             <input type="date" class="form-control" th:field="*{startDate}"/>
             <p class="error" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">error</p>
-            <span class="ok" th:unless="${#fields.hasErrors('startDate')}">OK</span>
         </div>
 
         <div class="form-group">
             <label class="control-label">End date:</label>
             <input type="date" class="form-control" th:field="*{endDate}"/>
             <p class="error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">error</p>
-            <span class="ok" th:unless="${#fields.hasErrors('endDate')}">OK</span>
         </div>
 
         <div class="form-group">
             <label class="control-label">Impact:</label>
             <input type="number" min="0.00" max="99000000.99" step="0.01" class="form-control" th:field="*{impact}"/>
             <p class="error" th:if="${#fields.hasErrors('impact')}" th:errors="*{impact}">error</p>
-            <span class="ok" th:unless="${#fields.hasErrors('impact')}">Ok</span>
         </div>
 
         <div class="row">

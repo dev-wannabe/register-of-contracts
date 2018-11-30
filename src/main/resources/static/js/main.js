@@ -4,12 +4,12 @@
 
 $(document).ready(function(){
 
-    $('.newBtn, .table .editBtn').on('click', function(event){
-        event.preventDefault();
+    $('.newBtn, .table .editBtn').on('click', function(event) {
+       event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
         if(text=='Edit'){
-        $.get(href, function(contract, status){
+        $.get(href, function(contract, status) {
             $('.editForm #id').val(contract.id)
             $('.editForm #number').val(contract.number)
             $('.editForm #name').val(contract.name)

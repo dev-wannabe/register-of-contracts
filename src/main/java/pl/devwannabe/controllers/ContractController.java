@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ import pl.devwannabe.services.ContractService;
 import javax.validation.Valid;
 
 @Controller
-public class MainController {
+public class ContractController {
 
     @Autowired
     private ContractService contractService;
@@ -43,21 +42,21 @@ public class MainController {
     }
 
     @PostMapping("/saveContract")
-    @Transactional
     public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
+
+        ContractService.printBlue(contract);
+
         if (bindingResult.hasErrors()) {
-            System.out.println("************  There were errors  ***********");
+            ContractService.printBlue("************ There were errors ***********");
             bindingResult.getAllErrors().forEach(error -> {
-                        System.out.println(error.getObjectName() +
-                                " " + error.getDefaultMessage());
-                    }
-            );
+                System.out.println(error.getObjectName() +
+                        " " + error.getDefaultMessage());
+            });
             return "errors";
         } else {
             contractService.save(contract);
             return "redirect:/all-contracts";
         }
-
     }
 
     @PostMapping("/saveDescription")

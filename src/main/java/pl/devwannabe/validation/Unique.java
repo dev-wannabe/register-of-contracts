@@ -10,16 +10,15 @@ import static java.lang.annotation.ElementType.*;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target(FIELD)
+@Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {UniqueNumberValidator.class})
-public @interface UniqueNumber {
+@Constraint(validatedBy = {IdContractInputSupplier.class, UniqueNumberValidator.class})
+public @interface Unique {
 
     String message();
 
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };
-
 
 }
