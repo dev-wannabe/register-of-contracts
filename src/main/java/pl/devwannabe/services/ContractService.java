@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 import pl.devwannabe.domain.Contract;
 import pl.devwannabe.domain.ContractRepository;
 
-import java.time.LocalDate;
-import java.time.Period;
-
 @Service
 public class ContractService {
 
@@ -35,8 +32,6 @@ public class ContractService {
     }
 
     public void save(Contract contract) {
-        contract.setActive(isActive(contract));
-        contract.setDaysLeft(calculateDaysLeft(contract));
         contractRepository.save(contract);
     }
 
@@ -46,19 +41,6 @@ public class ContractService {
 
     public Contract getOne(Long id) {
         return contractRepository.getOne(id);
-    }
-
-    private int calculateDaysLeft(Contract contract) {
-        int days;
-        if (contract.getStartDate().isBefore(contract.getEndDate())) {
-            days = Period.between(LocalDate.now(), contract.getEndDate()).getDays();
-            return days;
-        }
-        return 0;
-    }
-
-    private boolean isActive(Contract contract) {
-        return LocalDate.now().isBefore(contract.getEndDate());
     }
 
 }

@@ -19,18 +19,14 @@ public class UniqueNumberValidator implements ConstraintValidator<Unique, String
     @Override
     public boolean isValid(String number, ConstraintValidatorContext context) {
 
-        ContractService.printBlue("isValid method for unique NUMBER running... number=" +
-                number + " id=" + getInputId());
-
-
         if (contractService == null || contractService.getByContractNumber(number) == null) {
             return true;
         } else if (getInputId() != null && contractService != null && contractService.getByContractNumber(number) != null) {
-            boolean isId = contractService.getByContractNumber(number).getId()
+            boolean isIdEqual = contractService.getByContractNumber(number).getId()
                     .equals(getInputId());
-            boolean isName = contractService.getByContractNumber(number).getNumber()
+            boolean isNumberEqual = contractService.getByContractNumber(number).getNumber()
                     .equals(contractService.getOne(getInputId()).getNumber());
-            return isId && isName;
+            return isIdEqual && isNumberEqual;
         }
         return false;
     }
@@ -40,19 +36,3 @@ public class UniqueNumberValidator implements ConstraintValidator<Unique, String
     }
 
 }
-
-/*
-When edit:
-if(idInput != null && idInput == idDb && nameInput == nameDb) {
-OK!
-}
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return false;
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-
-    }
-*/

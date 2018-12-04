@@ -10,14 +10,11 @@
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
-
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/descriptions.css" th:href="@{/css/descriptions.css}">
-
 </head>
 
 <body>
-
 <div class="container"> </br>
 
     <p>
@@ -36,35 +33,29 @@
         <a href="/" th:href="@{/descriptions}"><big>Systems description</big></a>
     </p> </br> </br>
 
-
     <div class="card">
         <div class="card-block">
 
             <table class="table table-hover">
                 <thead>
                 <tr>
-
-                    <th class="name">Name of system</th>
-                    <th class="startDate">Start date</th>
-                    <th class="endDate">End date</th>
+                    <th class="name">Contract Name</th>
+                    <th class="startDate">Start Date</th>
+                    <th class="endDate">End Date</th>
                     <th class="description">Description</th>
-
                 </tr>
                 </thead>
 
                 <tbody>
-
                 <tr th:each="contract : ${contractsList}">
-
                     <td th:utext="${#strings.escapeXml(contract.name)}">name</td>
-                    <td th:utext="${#strings.escapeXml(contract.startDate)}" >startDate</td>
-                    <td th:utext="${#strings.escapeXml(contract.endDate)}" >endDate</td>
-                    <td th:utext=${#strings.escapeXml(contract.description)} >description</td>
-                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
+                    <td th:utext="${#strings.escapeXml(contract.startDate)}">startDate</td>
+                    <td th:utext="${#strings.escapeXml(contract.endDate)}">endDate</td>
+                    <td th:utext=${#strings.escapeXml(contract.description)}>description</td>
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
+                    <td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
-
                 </tr>
-
                 </tbody>
             </table>
 
@@ -77,15 +68,11 @@
                 </li>
             </ul>
 
-
         </div>
     </div>
-
-    <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA EDIT--------->
-
+    <!-----------------EDIT----------------->
     <div class="editForm">
         <form th:action="@{/saveDescription}" method="post">
-
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -97,37 +84,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-
                             <div class="form-group">
                                 <input type="hidden" class="form-control" id="id" name="id" value=""/>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="number" name="number" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="name" name="name" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="startDate" name="startDate" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="endDate" name="endDate" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="impact" name="impact" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="daysLeft" name="daysLeft" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="active" name="active" value=""/>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="description" class="col-form-label">Description:</label>
                                 <textarea class="form-control" id="description" name="description" rows="12"></textarea>
                             </div>
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-primary" value="save"/>
@@ -136,12 +99,10 @@
                     </div>
 
                 </div>
+            </div>
         </form>
-
     </div>
-
-    <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
-
+    <!----------------DELETE----------------->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -153,11 +114,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                     <p class="alert alert-danger">
                         Are you sure?
                     </p>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -168,8 +127,5 @@
     </div>
 
 </div>
-
-
 </body>
-
 </html>

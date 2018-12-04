@@ -30,13 +30,13 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label">Number:</label>
+            <label class="control-label">Contract Number:</label>
             <input type="text" class="form-control" th:field="*{number}"/>
             <p class="error" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">error</p>
         </div>
 
         <div class="form-group">
-            <label class="control-label">Name:</label>
+            <label class="control-label">Contract Name:</label>
             <input type="text" class="form-control" th:field="*{name}"/>
             <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</p>
         </div>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label">End date:</label>
+            <label class="control-label">End Date:</label>
             <input type="date" class="form-control" th:field="*{endDate}"/>
             <p class="error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">error</p>
         </div>

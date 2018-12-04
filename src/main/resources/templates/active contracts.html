@@ -4,33 +4,23 @@
 <head>
     <meta charset="utf-8"/>
     <title>Register of contract</title>
-    <!--  <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/descriptions.css}"/> -->
-
 
     <script type="text/javascript"
             src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
-
-
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/contracts.css" th:href="@{/css/contracts.css}">
-
-
 </head>
 
 <body>
 
 <div class="container"> </br>
-
     <p>
     <h1>Register of contracts</h1>
     </p>
-
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
-
-
     <p>
         <a href="/main" th:href="@{/all-contracts}"><big>All contracts</big></a>
         &nbsp
@@ -42,45 +32,34 @@
 
     </p> </br> </br>
 
-
-
-
     <div class="card">
         <div class="card-block">
-
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th class="number">Number of contract</th>
-                    <th class="name">Name of system</th>
-                    <th class="startDate">Start date</th>
-                    <th class="endDate">End date</th>
+                    <th class="number">Contract Number</th>
+                    <th class="name">System Name</th>
+                    <th class="startDate">Start Date</th>
+                    <th class="endDate">End Date</th>
                     <th class="impact">Impact</th>
-                    <th class="daysLeft">Days left</th>
+                    <th class="daysLeft">Days Left</th>
                     <th class="active">Active</th>
                 </tr>
                 </thead>
 
                 <tbody>
-
                 <tr th:each="contract : ${contractsList}">
-
                     <td th:utext="${#strings.escapeXml(contract.number)}">number</td>
                     <td th:utext="${#strings.escapeXml(contract.name)}">name</td>
-                    <td th:utext="${#strings.escapeXml(contract.startDate)}" >startDate</td>
-                    <td th:utext="${#strings.escapeXml(contract.endDate)}" >endDate</td>
+                    <td th:utext="${#strings.escapeXml(contract.startDate)}">startDate</td>
+                    <td th:utext="${#strings.escapeXml(contract.endDate)}">endDate</td>
                     <td th:utext="${#strings.escapeXml(#numbers.formatDecimal (contract.impact, 1, 2) + ' zł')}">impact</td>
                     <td class="daysLeftContent" th:utext="${#strings.escapeXml(contract.daysLeft)}">days left</td>
                     <td class="activeContent" th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active</td>
-                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
-                    <td>
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
-
                 </tr>
-
-
                 </tbody>
-
 
             </table>
 
@@ -89,16 +68,11 @@
                     th:each="i : ${#numbers.sequence(0, contractsList.totalPages -1)}">
                     <a th:href="@{/active-contracts(page=${i})}" th:text="${i}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
-
                 </li>
             </ul>
-
-
         </div>
     </div>
-
-    <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA EDIT--------->
-
+    <!-----------------EDIT----------------->
     <div class="editForm">
         <form th:action="@{/saveContract}" method="post">
 
@@ -113,18 +87,18 @@
                             </button>
                         </div>
                         <div class="modal-body">
-
                             <div class="form-group">
                                 <input type="hidden" class="form-control" id="id" name="id" value=""/>
                             </div>
-
                             <div class="form-group">
                                 <label for="number" class="col-form-label">Number:</label>
-                                <input type="text" minlength="1" maxlength="50" class="form-control" id="number" name="number" value=""/>
+                                <input type="text" minlength="1" maxlength="50" class="form-control" id="number"
+                                       name="number" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="name" class="col-form-label">Name:</label>
-                                <input type="text" minlength="1" maxlength="50" class="form-control" id="name" name="name" value=""/>
+                                <input type="text" minlength="1" maxlength="50" class="form-control" id="name"
+                                       name="name" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="startDate" class="col-form-label">Start date</label>
@@ -136,18 +110,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="impact" class="col-form-label">Impact:</label>
-                                <input type="number" min="0.00" max="99000000.99" step="0.01" class="form-control" id="impact" name="impact" value=""/>
+                                <input type="number" min="0.00" max="99000000.99" step="0.01" class="form-control"
+                                       id="impact" name="impact" value=""/>
                             </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="daysLeft" name="daysLeft" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="active" name="active" value=""/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="description" name="description" value=""/>
-                            </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -159,11 +124,8 @@
 
             </div>
         </form>
-
     </div>
-
-    <!---------FORMULARZ BOOTSTRAPA DLA BUTTONA DELETE--------->
-
+    <!----------------DELETE----------------->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -176,9 +138,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-danger">
-
                         Are you sure?
-
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -190,8 +150,5 @@
     </div>
 
 </div>
-
-
 </body>
-
 </html>

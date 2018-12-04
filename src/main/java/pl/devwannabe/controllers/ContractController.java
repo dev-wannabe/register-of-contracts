@@ -44,8 +44,6 @@ public class ContractController {
     @PostMapping("/saveContract")
     public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
 
-        ContractService.printBlue(contract);
-
         if (bindingResult.hasErrors()) {
             ContractService.printBlue("************ There were errors ***********");
             bindingResult.getAllErrors().forEach(error -> {
