@@ -1,10 +1,12 @@
-package pl.devwannabe.validation;
+package pl.devwannabe.validation.number_validation;
 import org.springframework.stereotype.Component;
+import pl.devwannabe.validation.annotations.Unique;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @Component
-public class IdContractInputSupplier implements ConstraintValidator<Unique, Long> {
+public class InputIdContractSupplier implements ConstraintValidator<Unique, Long> {
 
     protected static Long InputId;
 
@@ -18,5 +20,7 @@ public class IdContractInputSupplier implements ConstraintValidator<Unique, Long
         InputId = id;
         return true;
     }
+
+
 
 }

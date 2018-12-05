@@ -1,7 +1,7 @@
 package pl.devwannabe.domain;
 
 import org.springframework.stereotype.Component;
-import pl.devwannabe.services.ContractService;
+
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -14,7 +14,6 @@ public class ContractEntityListener {
     @PreUpdate
     @PrePersist
     void preUpdate(Contract contract) {
-        ContractService.printBlue(contract);
         contract.setDaysLeft(calculateDaysLeft(contract));
         contract.setActive(isActive(contract));
     }
@@ -23,6 +22,7 @@ public class ContractEntityListener {
     void preLoad(Contract contract) {
         contract.setDaysLeft(calculateDaysLeft(contract));
         contract.setActive(isActive(contract));
+        //todo po przeładowaniu ustawią się na widoku ale nie zapiszą w bazie
     }
 
     private int calculateDaysLeft(Contract contract) {
@@ -36,6 +36,7 @@ public class ContractEntityListener {
 
     private boolean isActive(Contract contract) {
         return LocalDate.now().isBefore(contract.getEndDate());
+        //todo może być 'jeszcze' nieaktywny
     }
 
 }

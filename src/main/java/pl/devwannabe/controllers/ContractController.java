@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.devwannabe.domain.Contract;
 import pl.devwannabe.services.ContractService;
@@ -23,7 +24,7 @@ public class ContractController {
         model.addAttribute("contractsList", contractService
                 .getAllContracts(PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
         model.addAttribute("currentPage", page);
-        return "all contracts";
+        return "contracts";
     }
 
     @GetMapping("/active-contracts")
@@ -31,7 +32,7 @@ public class ContractController {
         model.addAttribute("contractsList", contractService
                 .getByActive(true, PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
         model.addAttribute("currentPage", page);
-        return "active contracts";
+        return "contracts";
     }
 
     @GetMapping("/descriptions")
@@ -42,7 +43,7 @@ public class ContractController {
     }
 
     @PostMapping("/saveContract")
-    public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
+    public String saveContract(@Validated Contract contract, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             ContractService.printBlue("************ There were errors ***********");

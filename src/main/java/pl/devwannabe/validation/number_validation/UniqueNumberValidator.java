@@ -1,7 +1,8 @@
-package pl.devwannabe.validation;
+package pl.devwannabe.validation.number_validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.devwannabe.services.ContractService;
+import pl.devwannabe.validation.annotations.Unique;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -32,7 +33,7 @@ public class UniqueNumberValidator implements ConstraintValidator<Unique, String
     }
 
     private Long getInputId() {
-        return IdContractInputSupplier.InputId;
+        return InputIdContractSupplier.InputId;
     }
 
 }
