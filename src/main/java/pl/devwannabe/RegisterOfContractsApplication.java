@@ -1,19 +1,14 @@
 package pl.devwannabe;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class RegisterOfContractsApplication implements CommandLineRunner {
+public class RegisterOfContractsApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(RegisterOfContractsApplication.class, args);
 
 	}
-	@Override
-	public void run(String... args) {
 
-	}
 }

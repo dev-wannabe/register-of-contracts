@@ -1,15 +1,33 @@
 package pl.devwannabe.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import pl.devwannabe.services.ContractService;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.time.LocalDate;
-import java.time.Period;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Component
 public class ContractEntityListener {
+
+    static private ContractService contractService;
+
+    @Autowired
+    @Qualifier("contractService")
+    public void setSearchService(ContractService contractService) {
+        this.contractService = contractService;
+    }
+
+    @PostConstruct
+    public void init() {
+        ContractService.printBlue("contractService is null? " + (contractService == null));
+    }
 
     @PreUpdate
     @PrePersist
@@ -19,24 +37,26 @@ public class ContractEntityListener {
     }
 
     @PostLoad
-    void preLoad(Contract contract) {
+    void postLoad(Contract contract) {
         contract.setDaysLeft(calculateDaysLeft(contract));
         contract.setActive(isActive(contract));
-        //todo po przeładowaniu ustawią się na widoku ale nie zapiszą w bazie
+        contractService.save(contract);
     }
 
     private int calculateDaysLeft(Contract contract) {
-        int days;
-        if (contract.getStartDate().isBefore(contract.getEndDate())) {
-            days = Period.between(LocalDate.now(), contract.getEndDate()).getDays();
-            return days;
+        if (LocalDate.now().isBefore(contract.getStartDate())) {
+            Long days = DAYS.between(contract.getStartDate(), contract.getEndDate());
+            return days.intValue();
+        } else {
+            Long days = DAYS.between(LocalDate.now(), contract.getEndDate());
+            return days.intValue();
         }
-        return 0;
     }
 
     private boolean isActive(Contract contract) {
-        return LocalDate.now().isBefore(contract.getEndDate());
-        //todo może być 'jeszcze' nieaktywny
+        return LocalDate.now().isBefore(contract.getEndDate()) &&
+                LocalDate.now().isAfter(contract.getStartDate().minusDays(1));
+
     }
 
 }
