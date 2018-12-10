@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import pl.devwannabe.domain.Contract;
-import pl.devwannabe.domain.ContractRepository;
+import pl.devwannabe.domain.Model.Contract;
+import pl.devwannabe.domain.repository.ContractRepository;
 
 @Service
 public class ContractService {

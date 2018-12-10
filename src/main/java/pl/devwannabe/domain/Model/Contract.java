@@ -1,9 +1,10 @@
-package pl.devwannabe.domain;
+package pl.devwannabe.domain.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.devwannabe.domain.ContractEntityListener;
 import pl.devwannabe.validation.annotations.EndDate;
 import pl.devwannabe.validation.annotations.StartDate;
 import pl.devwannabe.validation.annotations.Unique;

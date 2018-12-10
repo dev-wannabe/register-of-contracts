@@ -3,12 +3,12 @@ package pl.devwannabe.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.devwannabe.domain.Contract;
+import pl.devwannabe.domain.Model.Contract;
 import pl.devwannabe.services.ContractService;
 
 import javax.validation.Valid;
@@ -43,7 +43,7 @@ public class ContractController {
     }
 
     @PostMapping("/saveContract")
-    public String saveContract(@Validated Contract contract, BindingResult bindingResult) {
+    public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             ContractService.printBlue("************ There were errors ***********");

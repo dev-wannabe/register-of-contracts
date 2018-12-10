@@ -3,6 +3,7 @@ package pl.devwannabe.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import pl.devwannabe.domain.Model.Contract;
 import pl.devwannabe.services.ContractService;
 
 import javax.annotation.PostConstruct;
@@ -54,7 +55,7 @@ public class ContractEntityListener {
     }
 
     private boolean isActive(Contract contract) {
-        return LocalDate.now().isBefore(contract.getEndDate()) &&
+        return LocalDate.now().isBefore(contract.getEndDate().plusDays(1)) &&
                 LocalDate.now().isAfter(contract.getStartDate().minusDays(1));
 
     }
