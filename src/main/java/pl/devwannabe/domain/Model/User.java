@@ -1,5 +1,6 @@
 package pl.devwannabe.domain.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,12 +10,13 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
+
     private String username;
     private String password;
 

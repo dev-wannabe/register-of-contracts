@@ -1,0 +1,46 @@
+ body {
+ background-color: #32313b;
+ }
+
+ h1  {
+ color: white;
+ }
+
+ h2  {
+ color: white;
+ }
+
+ .control-label {
+ color: white;
+ }
+
+ #login-form {
+ width: 40%;
+ padding: 100px 0;
+ margin: 0 auto;
+
+ }
+
+ .error {
+ color: red;
+ }
+
+ .ok {
+  color: green;
+  }
+
+ /*
+  #loginForm {
+  width: 50%;
+    width: 100%;
+    color: #333333;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    float: none;
+  }
+  */

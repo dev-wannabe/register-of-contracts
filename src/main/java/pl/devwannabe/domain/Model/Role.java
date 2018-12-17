@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "role")
 public class Role {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

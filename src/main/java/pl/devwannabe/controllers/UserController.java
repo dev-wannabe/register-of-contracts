@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.devwannabe.domain.Model.User;
+import pl.devwannabe.services.ContractService;
 import pl.devwannabe.services.security.SecurityService;
 import pl.devwannabe.services.security.UserService;
 import pl.devwannabe.validation.user_validation.UserValidator;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -35,7 +38,16 @@ public class UserController {
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
+        ContractService.printBlue(userForm);
+
         if (bindingResult.hasErrors()) {
+
+            ContractService.printBlue("************ There were registration errors ***********");
+            bindingResult.getAllErrors().
+                    forEach(error -> System.out.println(
+                            error.getObjectName() + " " +
+                                    error.getCode() + " " +
+                                    error.getDefaultMessage()));
             return "registration";
         }
 
@@ -49,7 +61,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Wrong user or password.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
