@@ -1,0 +1,63 @@
+ body {
+ background-color: #32313b;
+ }
+
+ h1  {
+ color: white;
+ }
+
+ .marquee {
+ width: 300%;
+ overflow: hidden;
+ color: white;
+
+ }
+
+
+ /*
+  #loginForm {
+  overflow: hidden;
+  width: 50%;
+    width: 100%;
+    color: #333333;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    float: none;
+  }
+
+  body { margin: 20px; }
+
+  .marquee {
+    height: 25px;
+    width: 420px;
+ white-space: pre-line;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .marquee div {
+    display: block;
+    width: 200%;
+    height: 30px;
+
+    position: absolute;
+    overflow: hidden;
+
+    animation: marquee 5s linear infinite;
+  }
+
+  .marquee span {
+    float: left;
+    width: 50%;
+  }
+
+  @keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+  }
+  */

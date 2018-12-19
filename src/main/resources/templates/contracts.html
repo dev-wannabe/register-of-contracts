@@ -21,16 +21,21 @@
     </p>
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
     <p>
-        <a href="/" th:href="@{/all-contracts}"><big>All contracts</big></a>
+        <a th:href="@{/all-contracts}"><big><b>All contracts</b></big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/active-contracts}"><big>Active contracts</big></a>
+        <a th:href="@{/active-contracts}"><big><b>Active contracts</b></big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/descriptions}"><big>Systems description</big></a>
+        <a th:href="@{/descriptions}"><big><b>Systems description</b></big></a>
     </p> </br> </br>
 
-    <button class="btn btn-success newBtn">Add Contract</button>
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <button class="btn btn-success btn-lg newBtn">Add contract</button>
+            <button type="submit" class="btn btn-info btn-lg exitBtn">Exit program</button>
+        </form>
+    </div>
 
     <div class="card">
         <div class="card-block">

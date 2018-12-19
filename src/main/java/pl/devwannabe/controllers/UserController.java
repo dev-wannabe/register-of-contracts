@@ -1,6 +1,8 @@
 package pl.devwannabe.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.devwannabe.domain.Model.User;
 import pl.devwannabe.services.ContractService;
+import pl.devwannabe.services.security.WelcomeAsciiArt;
 import pl.devwannabe.services.security.SecurityService;
 import pl.devwannabe.services.security.UserService;
 import pl.devwannabe.validation.user_validation.UserValidator;
-
-import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -50,7 +51,6 @@ public class UserController {
                                     error.getDefaultMessage()));
             return "registration";
         }
-
         userService.save(userForm);
 
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
@@ -71,6 +71,10 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = auth.getName();
+        WelcomeAsciiArt asciiArt = new WelcomeAsciiArt();
+        model.addAttribute("hello", asciiArt.makeAsciiArt('#', "Hello " + loggedInUsername + " !!!"));
         return "welcome";
     }
 }

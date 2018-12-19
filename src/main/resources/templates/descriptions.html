@@ -24,14 +24,20 @@
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
 
     <p>
-        <a href="/" th:href="@{/all-contracts}"><big>All contracts</big></a>
+        <a href="/" th:href="@{/all-contracts}"><big><b>All contracts</b></big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/active-contracts}"><big>Active contracts</big></a>
+        <a href="/" th:href="@{/active-contracts}"><big><b>Active contracts</b></big></a>
         &nbsp
         &nbsp
-        <a href="/" th:href="@{/descriptions}"><big>Systems description</big></a>
+        <a href="/" th:href="@{/descriptions}"><big><b>Systems description</b></big></a>
     </p> </br> </br>
+
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-info btn-lg exitBtn">Exit program</button>
+        </form>
+    </div>
 
     <div class="card">
         <div class="card-block">
@@ -52,8 +58,7 @@
                     <td th:utext="${#strings.escapeXml(contract.startDate)}">startDate</td>
                     <td th:utext="${#strings.escapeXml(contract.endDate)}">endDate</td>
                     <td th:utext=${#strings.escapeXml(contract.description)}>description</td>
-                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
-                    <td>
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
                 </tr>
                 </tbody>
