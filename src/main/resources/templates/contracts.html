@@ -17,18 +17,21 @@
 <body>
 <div class="container"> </br>
     <p>
-    <h1>Register of contracts</h1>
-    </p>
+    <h1>Register of contracts</h1></p>
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
-    <p>
-        <a th:href="@{/all-contracts}"><big><b>All contracts</b></big></a>
+
+    <div>
+        <a style="color:white" th:href="@{/all-contracts}"><big><b>All contracts</b></big></a>
         &nbsp
+        <span style="color:white">/</span>
         &nbsp
-        <a th:href="@{/active-contracts}"><big><b>Active contracts</b></big></a>
+        <a style="color:white" th:href="@{/active-contracts}"><big><b>Active contract</b></big></a>
         &nbsp
+        <span style="color:white">/</span>
         &nbsp
-        <a th:href="@{/descriptions}"><big><b>Systems description</b></big></a>
-    </p> </br> </br>
+        <a style="color:white" th:href="@{/descriptions}"><big><b>Systems description</b></big></a>
+    </div>
+    </br> </br> </br>
 
     <div>
         <form th:action="@{/logout}" method="post">
@@ -57,12 +60,16 @@
                 <tr th:each="contract : ${contractsList}">
                     <td th:utext="${#strings.escapeXml(contract.number)}">number</td>
                     <td th:utext="${#strings.escapeXml(contract.name)}">name</td>
-                    <td th:utext="${#strings.escapeXml(contract.startDate)}" >startDate</td>
-                    <td th:utext="${#strings.escapeXml(contract.endDate)}" >endDate</td>
-                    <td th:utext="${#strings.escapeXml(#numbers.formatDecimal (contract.impact, 1, 2) + ' zł')}">impact</td>
+                    <td th:utext="${#strings.escapeXml(contract.startDate)}">startDate</td>
+                    <td th:utext="${#strings.escapeXml(contract.endDate)}">endDate</td>
+                    <td th:utext="${#strings.escapeXml(#numbers.formatDecimal (contract.impact, 1, 2) + ' zł')}">
+                        impact
+                    </td>
                     <td class="daysLeftContent" th:utext="${#strings.escapeXml(contract.daysLeft)}">days left</td>
-                    <td class="activeContent" th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active</td>
-                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a><td>
+                    <td class="activeContent" th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active
+                    </td>
+                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
+                    <td>
                     <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
                 </tr>
                 </tbody>

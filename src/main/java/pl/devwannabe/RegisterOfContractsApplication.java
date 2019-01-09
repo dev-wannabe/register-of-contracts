@@ -2,20 +2,14 @@ package pl.devwannabe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
 
 @SpringBootApplication
-public class RegisterOfContractsApplication extends SpringBootServletInitializer {
+public class RegisterOfContractsApplication {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(RegisterOfContractsApplication.class);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RegisterOfContractsApplication.class, args);
 
-	public static void main(String[] args) {
-		SpringApplication.run(RegisterOfContractsApplication.class, args);
-
-	}
+    }
 
 }

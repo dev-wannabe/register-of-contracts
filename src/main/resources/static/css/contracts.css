@@ -52,6 +52,10 @@
   text-align:center;
   }
 
+ #links {
+  color: white;
+  }
+
  .editBtn {
   float: right;
   margin-right: -20px;
