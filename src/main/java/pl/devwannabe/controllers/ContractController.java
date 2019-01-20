@@ -32,13 +32,14 @@ public class ContractController {
         model.addAttribute("contractsList", contractService
                 .getByActive(true, PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
         model.addAttribute("currentPage", page);
-        return "contracts";
+        return "active contracts";
     }
 
     @GetMapping("/descriptions")
     public String showWithDescriptions(Model model, @RequestParam(defaultValue = "0") int page) {
         model.addAttribute("contractsList", contractService
                 .getAllContracts(PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
+        model.addAttribute("currentPage", page);
         return "descriptions";
     }
 

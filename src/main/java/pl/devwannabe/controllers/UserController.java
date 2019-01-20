@@ -49,18 +49,19 @@ public class UserController {
         }
         userService.save(userForm);
 
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
         return "redirect:/welcome";
     }
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
-        if (error != null)
+        if (error != null) {
             model.addAttribute("error", "Wrong user or password.");
-
-        if (logout != null)
+        }
+        if (logout != null) {
             model.addAttribute("message", "You have been logged out successfully.");
+        }
 
         return "login";
     }

@@ -2,7 +2,6 @@ package pl.devwannabe.domain.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.devwannabe.domain.ContractEntityListener;
 import pl.devwannabe.validation.annotations.EndDate;
@@ -21,7 +20,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "contracts")
 @Data
-@NoArgsConstructor
 @EntityListeners({ContractEntityListener.class})
 @GroupSequence({Contract.class, ValidateGroupFirst.class, ValidateGroupSecond.class})
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -56,8 +54,8 @@ public class Contract {
     private LocalDate endDate;
 
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
-    @NotNull(message = "''Impact'' can not be empty")
-    private BigDecimal impact;
+    @NotNull(message = "''Income'' can not be empty")
+    private BigDecimal income;
 
     @Column(nullable = false)
     private Integer daysLeft;

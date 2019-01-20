@@ -46,10 +46,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th class="name">Contract Name</th>
+                    <th class="name">System Name</th>
                     <th class="startDate">Start Date</th>
                     <th class="endDate">End Date</th>
-                    <th class="description">Description</th>
+                    <th class="description">System Description</th>
                 </tr>
                 </thead>
 
@@ -69,9 +69,8 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"
                     th:each="i : ${#numbers.sequence(0, contractsList.totalPages -1)}">
-                    <a th:href="@{/descriptions(page=${i})}" th:text="${i}" class="nav-link"
+                    <a th:href="@{/descriptions(page=${i})}" th:text="${i+1}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
-
                 </li>
             </ul>
 
@@ -93,6 +92,26 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" class="form-control" id="id" name="id" value=""/>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="number"
+                                       name="number" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="name"
+                                       name="name" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden"  class="form-control" id="startDate"
+                                       name="startDate" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="endDate" name="endDate" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control"
+                                       id="income" name="income" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="description" class="col-form-label">Description:</label>

@@ -33,15 +33,19 @@ public class ContractEntityListener {
     @PreUpdate
     @PrePersist
     void preUpdate(Contract contract) {
-        contract.setDaysLeft(calculateDaysLeft(contract));
-        contract.setActive(isActive(contract));
+        if(contract != null) {
+            contract.setDaysLeft(calculateDaysLeft(contract));
+            contract.setActive(isActive(contract));
+        }
     }
 
     @PostLoad
     void postLoad(Contract contract) {
-        contract.setDaysLeft(calculateDaysLeft(contract));
-        contract.setActive(isActive(contract));
-        contractService.save(contract);
+        if(contract != null) {
+            contract.setDaysLeft(calculateDaysLeft(contract));
+            contract.setActive(isActive(contract));
+            contractService.save(contract);
+        }
     }
 
     private int calculateDaysLeft(Contract contract) {

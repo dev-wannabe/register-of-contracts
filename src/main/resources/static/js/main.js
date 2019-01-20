@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
     $('.newBtn, .table .editBtn').on('click', function(event) {
-       event.preventDefault();
+        event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
         if(text=='Edit'){
@@ -13,7 +13,7 @@ $(document).ready(function(){
             $('.editForm #name').val(contract.name)
             $('.editForm #startDate').val(contract.startDate)
             $('.editForm #endDate').val(contract.endDate)
-            $('.editForm #impact').val(contract.impact)
+            $('.editForm #income').val(contract.income)
             $('.editForm #description').val(contract.description)
         });
 
@@ -25,8 +25,8 @@ $(document).ready(function(){
                         $('.editForm #name').val('')
                         $('.editForm #startDate').val('')
                         $('.editForm #endDate').val('')
-                        $('.editForm #impact').val('')
-                        $('.editForm #description').val('No description available, yet')
+                        $('.editForm #income').val('')
+                        $('.editForm #description').val('')
                         $('.editForm #exampleModal').modal();
         }
     });

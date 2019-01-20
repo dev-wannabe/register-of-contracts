@@ -78,7 +78,7 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"
                     th:each="i : ${#numbers.sequence(0, contractsList.totalPages -1)}">
-                    <a th:href="@{/all-contracts(page=${i})}" th:text="${i+1}" class="nav-link"
+                    <a th:href="@{/active-contracts(page=${i})}" th:text="${i+1}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
                 </li>
             </ul>
