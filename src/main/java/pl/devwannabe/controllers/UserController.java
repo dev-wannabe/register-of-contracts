@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.devwannabe.domain.Model.User;
 import pl.devwannabe.services.ContractService;
-import pl.devwannabe.services.security.WelcomeAsciiArt;
+import pl.devwannabe.utils.WelcomeAsciiArt;
 import pl.devwannabe.services.security.SecurityService;
 import pl.devwannabe.services.security.UserService;
 import pl.devwannabe.validation.user_validation.UserValidator;

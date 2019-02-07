@@ -1,4 +1,4 @@
-package pl.devwannabe.services.security;
+package pl.devwannabe.utils;
 
 import java.util.ArrayList;
 import java.util.List;
