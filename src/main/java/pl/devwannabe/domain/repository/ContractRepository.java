@@ -4,13 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.devwannabe.domain.Model.Contract;
+import pl.devwannabe.domain.Model.ContractEntity;
 
 
 @Repository
-public interface ContractRepository extends JpaRepository<Contract, Long> {
+public interface ContractRepository extends JpaRepository<ContractEntity, Long> {
 
-    Page<Contract> findByActive(Boolean active, Pageable pageable);
+    Page<ContractEntity> findByActive(Boolean active, Pageable pageable);
 
-    Contract findByNumber(String contractNumber);
+    ContractEntity findByNumber(String contractNumber);
 }

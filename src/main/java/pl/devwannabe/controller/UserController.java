@@ -1,4 +1,4 @@
-package pl.devwannabe.controllers;
+package pl.devwannabe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.devwannabe.domain.Model.User;
-import pl.devwannabe.services.ContractService;
+import pl.devwannabe.service.ContractService;
 import pl.devwannabe.utils.WelcomeAsciiArt;
-import pl.devwannabe.services.security.SecurityService;
-import pl.devwannabe.services.security.UserService;
+import pl.devwannabe.service.security.SecurityService;
+import pl.devwannabe.service.security.UserService;
 import pl.devwannabe.validation.user_validation.UserValidator;
 
 @Controller

@@ -1,7 +1,7 @@
 package pl.devwannabe.validation.number_validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.devwannabe.services.ContractService;
+import pl.devwannabe.service.ContractService;
 import pl.devwannabe.validation.annotations.Unique;
 
 import javax.validation.ConstraintValidator;

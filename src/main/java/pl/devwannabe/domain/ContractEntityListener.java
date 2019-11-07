@@ -3,8 +3,8 @@ package pl.devwannabe.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import pl.devwannabe.domain.Model.Contract;
-import pl.devwannabe.services.ContractService;
+import pl.devwannabe.domain.Model.ContractEntity;
+import pl.devwannabe.service.ContractService;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.PostLoad;
@@ -32,35 +32,35 @@ public class ContractEntityListener {
 
     @PreUpdate
     @PrePersist
-    void preUpdate(Contract contract) {
-        if(contract != null) {
-            contract.setDaysLeft(calculateDaysLeft(contract));
-            contract.setActive(isActive(contract));
+    void preUpdate(ContractEntity contractEntity) {
+        if(contractEntity != null) {
+            contractEntity.setDaysLeft(calculateDaysLeft(contractEntity));
+            contractEntity.setActive(isActive(contractEntity));
         }
     }
 
     @PostLoad
-    void postLoad(Contract contract) {
-        if(contract != null) {
-            contract.setDaysLeft(calculateDaysLeft(contract));
-            contract.setActive(isActive(contract));
-            contractService.save(contract);
+    void postLoad(ContractEntity contractEntity) {
+        if(contractEntity != null) {
+            contractEntity.setDaysLeft(calculateDaysLeft(contractEntity));
+            contractEntity.setActive(isActive(contractEntity));
+            contractService.save(contractEntity);
         }
     }
 
-    private int calculateDaysLeft(Contract contract) {
-        if (LocalDate.now().isBefore(contract.getStartDate())) {
-            Long days = DAYS.between(contract.getStartDate(), contract.getEndDate());
+    private int calculateDaysLeft(ContractEntity contractEntity) {
+        if (LocalDate.now().isBefore(contractEntity.getStartDate())) {
+            Long days = DAYS.between(contractEntity.getStartDate(), contractEntity.getEndDate());
             return days.intValue();
         } else {
-            Long days = DAYS.between(LocalDate.now(), contract.getEndDate());
+            Long days = DAYS.between(LocalDate.now(), contractEntity.getEndDate());
             return days.intValue();
         }
     }
 
-    private boolean isActive(Contract contract) {
-        return LocalDate.now().isBefore(contract.getEndDate().plusDays(1)) &&
-                LocalDate.now().isAfter(contract.getStartDate().minusDays(1));
+    private boolean isActive(ContractEntity contractEntity) {
+        return LocalDate.now().isBefore(contractEntity.getEndDate().plusDays(1)) &&
+                LocalDate.now().isAfter(contractEntity.getStartDate().minusDays(1));
 
     }
 

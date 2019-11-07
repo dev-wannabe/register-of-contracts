@@ -1,4 +1,4 @@
-package pl.devwannabe.controllers;
+package pl.devwannabe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.devwannabe.domain.Model.Contract;
-import pl.devwannabe.services.ContractService;
+import pl.devwannabe.domain.Contract;
+import pl.devwannabe.domain.Model.ContractEntity;
+import pl.devwannabe.service.ContractService;
 
 import javax.validation.Valid;
 
@@ -54,14 +55,14 @@ public class ContractController {
             });
             return "errors";
         } else {
-            contractService.save(contract);
+           // contractService.save(contractEntity);
             return "redirect:/all-contracts";
         }
     }
 
     @PostMapping("/saveDescription")
-    public String saveDescription(Contract contract) {
-        contractService.save(contract);
+    public String saveDescription(ContractEntity contractEntity) {
+        contractService.save(contractEntity);
         return "redirect:/descriptions";
     }
 
@@ -73,7 +74,7 @@ public class ContractController {
 
     @GetMapping("/getOneContract")
     @ResponseBody
-    public Contract getOneContract(@RequestParam("id") Long id) {
+    public ContractEntity getOneContract(@RequestParam("id") Long id) {
         return contractService.getOne(id);
     }
 }

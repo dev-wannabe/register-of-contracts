@@ -21,40 +21,40 @@ import java.time.LocalDate;
 @Table(name = "contracts")
 @Data
 @EntityListeners({ContractEntityListener.class})
-@GroupSequence({Contract.class, ValidateGroupFirst.class, ValidateGroupSecond.class})
+@GroupSequence({ContractEntity.class, ValidateGroupFirst.class, ValidateGroupSecond.class})
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Contract {
+public class ContractEntity {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Unique(groups = ValidateGroupFirst.class, message = "Annotation is here for idContractInputSupplier class ")
+    //@Unique(groups = ValidateGroupFirst.class, message = "Annotation is here for idContractInputSupplier class ")
     private Long id;
 
     @Column(nullable = false, unique = true, name = "contract_number")
-    @Size(min = 1, max = 50, message = "''Contract Number'' have to contain from 1 to 50 characters")
-    @NotNull
-    @Unique(groups = ValidateGroupSecond.class, message="Such ''Contract Number'' already exists.")
+//    @Size(min = 1, max = 50, message = "''Contract Number'' have to contain from 1 to 50 characters")
+//    @NotNull
+//    @Unique(groups = ValidateGroupSecond.class, message="Such ''Contract Number'' already exists.")
     private String number;
 
     @Column(nullable = false, name = "system_name")
-    @Size(min = 1, max = 50, message = "''System Name'' have to contain from 1 to 50 characters")
-    @NotNull
+//    @Size(min = 1, max = 50, message = "''System Name'' have to contain from 1 to 50 characters")
+//    @NotNull
     private String name;
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @StartDate(groups = ValidateGroupFirst.class, message = "This annotation is here for InputStartDateContractSupplier class")
-    @NotNull(message = "''Start Date'' can not be empty")
+//    @StartDate(groups = ValidateGroupFirst.class, message = "This annotation is here for InputStartDateContractSupplier class")
+//    @NotNull(message = "''Start Date'' can not be empty")
     private LocalDate startDate;
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @EndDate(groups = ValidateGroupSecond.class, message = " ''Start Date'' must be less than ''End Date'' ")
-    @NotNull(message = "''End Date'' can not be empty")
+//    @EndDate(groups = ValidateGroupSecond.class, message = " ''Start Date'' must be less than ''End Date'' ")
+//    @NotNull(message = "''End Date'' can not be empty")
     private LocalDate endDate;
 
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
-    @NotNull(message = "''Income'' can not be empty")
+//    @NotNull(message = "''Income'' can not be empty")
     private BigDecimal income;
 
     @Column(nullable = false)
@@ -65,5 +65,6 @@ public class Contract {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
 
 }
