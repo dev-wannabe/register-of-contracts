@@ -1,9 +1,11 @@
 package pl.devwannabe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.devwannabe.domain.Model.ContractEntity;
 import pl.devwannabe.validation.annotations.EndDate;
 import pl.devwannabe.validation.annotations.StartDate;
 import pl.devwannabe.validation.annotations.Unique;
@@ -13,7 +15,6 @@ import pl.devwannabe.validation.sequences.ValidateGroupSecond;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -27,7 +28,6 @@ import java.time.LocalDate;
 @GroupSequence({Contract.class, ValidateGroupFirst.class, ValidateGroupSecond.class})
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contract {
-
 
     @Unique(groups = ValidateGroupFirst.class, message = "Annotation is here for idContractInputSupplier class ")
     private Long id;
@@ -56,8 +56,6 @@ public class Contract {
 
     private int daysLeft;
     private boolean active;
-
     private String description;
-
 
 }

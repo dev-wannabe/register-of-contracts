@@ -44,7 +44,7 @@ public class ContractEntityListener {
         if(contractEntity != null) {
             contractEntity.setDaysLeft(calculateDaysLeft(contractEntity));
             contractEntity.setActive(isActive(contractEntity));
-            contractService.save(contractEntity);
+            contractService.save(contractEntity.convertTo());
         }
     }
 

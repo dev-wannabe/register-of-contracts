@@ -1,60 +1,42 @@
 package pl.devwannabe.domain.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.NoArgsConstructor;
+import pl.devwannabe.domain.Contract;
 import pl.devwannabe.domain.ContractEntityListener;
-import pl.devwannabe.validation.annotations.EndDate;
-import pl.devwannabe.validation.annotations.StartDate;
-import pl.devwannabe.validation.annotations.Unique;
-import pl.devwannabe.validation.sequences.ValidateGroupFirst;
-import pl.devwannabe.validation.sequences.ValidateGroupSecond;
 
 import javax.persistence.*;
-import javax.validation.GroupSequence;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "contracts")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EntityListeners({ContractEntityListener.class})
-@GroupSequence({ContractEntity.class, ValidateGroupFirst.class, ValidateGroupSecond.class})
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ContractEntity {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    //@Unique(groups = ValidateGroupFirst.class, message = "Annotation is here for idContractInputSupplier class ")
     private Long id;
 
     @Column(nullable = false, unique = true, name = "contract_number")
-//    @Size(min = 1, max = 50, message = "''Contract Number'' have to contain from 1 to 50 characters")
-//    @NotNull
-//    @Unique(groups = ValidateGroupSecond.class, message="Such ''Contract Number'' already exists.")
     private String number;
 
     @Column(nullable = false, name = "system_name")
-//    @Size(min = 1, max = 50, message = "''System Name'' have to contain from 1 to 50 characters")
-//    @NotNull
     private String name;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @StartDate(groups = ValidateGroupFirst.class, message = "This annotation is here for InputStartDateContractSupplier class")
-//    @NotNull(message = "''Start Date'' can not be empty")
     private LocalDate startDate;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @EndDate(groups = ValidateGroupSecond.class, message = " ''Start Date'' must be less than ''End Date'' ")
-//    @NotNull(message = "''End Date'' can not be empty")
     private LocalDate endDate;
 
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
-//    @NotNull(message = "''Income'' can not be empty")
     private BigDecimal income;
 
     @Column(nullable = false)
@@ -66,5 +48,33 @@ public class ContractEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+
+    public static ContractEntity convertFrom(Contract contract) {
+        return ContractEntity.builder()
+                .id(contract.getId())
+                .number(contract.getNumber())
+                .name(contract.getName())
+                .startDate(contract.getStartDate())
+                .endDate(contract.getEndDate())
+                .income(contract.getIncome())
+                .daysLeft(contract.getDaysLeft())
+                .active(contract.isActive())
+                .description(contract.getDescription())
+                .build();
+    }
+
+    public Contract convertTo() {
+        return Contract.builder()
+                .id(id)
+                .number(number)
+                .name(name)
+                .startDate(startDate)
+                .endDate(endDate)
+                .income(income)
+                .daysLeft(daysLeft)
+                .active(active)
+                .description(description)
+                .build();
+    }
 
 }
