@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import pl.devwannabe.domain.Model.User;
+import pl.devwannabe.domain.User;
 import pl.devwannabe.service.security.UserService;
 
 @Component

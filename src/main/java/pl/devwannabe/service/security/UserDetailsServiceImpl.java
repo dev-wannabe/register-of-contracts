@@ -8,12 +8,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.devwannabe.domain.Model.Role;
-import pl.devwannabe.domain.Model.User;
+import pl.devwannabe.domain.Model.RoleEntity;
+import pl.devwannabe.domain.Role;
+import pl.devwannabe.domain.User;
 import pl.devwannabe.domain.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,13 +26,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user;
+        if (userRepository.findByUsername(username) != null) {
+            user = userRepository.findByUsername(username).convertTo();
+        } else {
+            user = null;
 
+    }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : user.getRoles()){
+        Set<Role> roles = user.getRoles().stream().map(RoleEntity::convertTo).collect(Collectors.toSet());
+        for (Role role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
-
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

@@ -2,9 +2,9 @@ package pl.devwannabe.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.devwannabe.domain.Model.User;
+import pl.devwannabe.domain.Model.UserEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    UserEntity findByUsername(String username);
 }

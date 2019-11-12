@@ -1,0 +1,19 @@
+package pl.devwannabe.domain;
+
+import lombok.*;
+import pl.devwannabe.domain.Model.UserEntity;
+
+import java.util.Set;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Role {
+
+    private Long id;
+    private String role;
+
+    private Set<UserEntity> users;
+}

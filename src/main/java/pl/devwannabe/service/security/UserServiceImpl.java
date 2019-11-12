@@ -1,9 +1,11 @@
 package pl.devwannabe.service.security;
 
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.devwannabe.domain.Model.User;
+import pl.devwannabe.domain.Model.UserEntity;
+import pl.devwannabe.domain.User;
 import pl.devwannabe.domain.repository.RoleRepository;
 import pl.devwannabe.domain.repository.UserRepository;
 
@@ -25,11 +27,15 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(user);
+        val userEntity = UserEntity.convertFrom(user);
+        userRepository.save(userEntity);
     }
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        if(userRepository.findByUsername(username) != null)
+            return userRepository.findByUsername(username).convertTo();
+        else
+            return null;
     }
 }

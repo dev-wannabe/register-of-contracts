@@ -1,6 +1,6 @@
 package pl.devwannabe.service.security;
 
-import pl.devwannabe.domain.Model.User;
+import pl.devwannabe.domain.User;
 
 public interface UserService {
 
