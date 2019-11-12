@@ -1,6 +1,6 @@
 package pl.devwannabe.validation.date_validation;
 
-import pl.devwannabe.service.ContractService;
+import pl.devwannabe.service.ContractServiceImpl;
 import pl.devwannabe.validation.annotations.EndDate;
 
 import javax.validation.ConstraintValidator;
@@ -15,7 +15,7 @@ public class EndDateValidator implements ConstraintValidator<EndDate, LocalDate>
 
     @Override
     public boolean isValid(LocalDate endDate, ConstraintValidatorContext context) {
-        ContractService.printBlue("isValid method for @EndDate is running...");
+        ContractServiceImpl.printBlue("isValid method for @EndDate is running...");
         return getInputStartDate().isBefore(endDate);
     }
 

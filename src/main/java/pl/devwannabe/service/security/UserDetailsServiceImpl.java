@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.devwannabe.domain.Model.RoleEntity;
 import pl.devwannabe.domain.Role;
 import pl.devwannabe.domain.User;
-import pl.devwannabe.domain.repository.UserRepository;
+import pl.devwannabe.postgresql.role.RoleEntity;
+import pl.devwannabe.postgresql.user.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;

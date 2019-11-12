@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.devwannabe.domain.Contract;
-import pl.devwannabe.service.ContractService;
+import pl.devwannabe.service.ContractServiceImpl;
 
 import javax.validation.Valid;
 
@@ -19,7 +19,7 @@ import javax.validation.Valid;
 public class ContractController {
 
     @Autowired
-    private ContractService contractService;
+    private ContractServiceImpl contractService;
 
     @GetMapping("/all-contracts")
     public String showAll(Model model, @RequestParam(defaultValue = "0") int page) {
@@ -49,7 +49,7 @@ public class ContractController {
     public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            ContractService.printBlue("************ There were errors ***********");
+            ContractServiceImpl.printBlue("************ There were errors ***********");
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() +
                         " " + error.getDefaultMessage());

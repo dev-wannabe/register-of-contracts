@@ -1,8 +1,7 @@
-package pl.devwannabe.domain.repository;
+package pl.devwannabe.postgresql.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.devwannabe.domain.Model.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {

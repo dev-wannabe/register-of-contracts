@@ -1,10 +1,9 @@
-package pl.devwannabe.domain;
+package pl.devwannabe.postgresql.contract;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import pl.devwannabe.domain.Model.ContractEntity;
-import pl.devwannabe.service.ContractService;
+import pl.devwannabe.service.ContractServiceImpl;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.PostLoad;
@@ -17,17 +16,17 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Component
 public class ContractEntityListener {
 
-    static private ContractService contractService;
+    static private ContractServiceImpl contractService;
 
     @Autowired
     @Qualifier("contractService")
-    public void setSearchService(ContractService contractService) {
+    public void setSearchService(ContractServiceImpl contractService) {
         this.contractService = contractService;
     }
 
     @PostConstruct
     public void init() {
-        ContractService.printBlue("contractService is null? " + (contractService == null));
+        ContractServiceImpl.printBlue("contractService is null? " + (contractService == null));
     }
 
     @PreUpdate

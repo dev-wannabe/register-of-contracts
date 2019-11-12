@@ -6,11 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.devwannabe.domain.Contract;
-import pl.devwannabe.domain.Model.ContractEntity;
-import pl.devwannabe.domain.repository.ContractRepository;
+import pl.devwannabe.postgresql.contract.ContractEntity;
+import pl.devwannabe.postgresql.contract.ContractRepository;
 
 @Service
-public class ContractService {
+public class ContractServiceImpl {
 
     @Autowired
     private ContractRepository contractRepository;

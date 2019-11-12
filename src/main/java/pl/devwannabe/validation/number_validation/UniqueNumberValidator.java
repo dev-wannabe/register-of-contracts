@@ -1,7 +1,7 @@
 package pl.devwannabe.validation.number_validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.devwannabe.service.ContractService;
+import pl.devwannabe.service.ContractServiceImpl;
 import pl.devwannabe.validation.annotations.Unique;
 
 import javax.validation.ConstraintValidator;
@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueNumberValidator implements ConstraintValidator<Unique, String> {
 
     @Autowired
-    private ContractService contractService;
+    private ContractServiceImpl contractService;
 
     @Override
     public void initialize(Unique constraintAnnotation) {

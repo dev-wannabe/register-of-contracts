@@ -4,10 +4,10 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.devwannabe.domain.Model.UserEntity;
 import pl.devwannabe.domain.User;
-import pl.devwannabe.domain.repository.RoleRepository;
-import pl.devwannabe.domain.repository.UserRepository;
+import pl.devwannabe.postgresql.role.RoleRepository;
+import pl.devwannabe.postgresql.user.UserEntity;
+import pl.devwannabe.postgresql.user.UserRepository;
 
 import java.util.HashSet;
 

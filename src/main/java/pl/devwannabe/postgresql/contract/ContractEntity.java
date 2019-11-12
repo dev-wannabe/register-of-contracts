@@ -1,11 +1,10 @@
-package pl.devwannabe.domain.Model;
+package pl.devwannabe.postgresql.contract;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.devwannabe.domain.Contract;
-import pl.devwannabe.domain.ContractEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

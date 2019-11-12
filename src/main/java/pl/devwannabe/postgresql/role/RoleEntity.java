@@ -1,7 +1,8 @@
-package pl.devwannabe.domain.Model;
+package pl.devwannabe.postgresql.role;
 
 import lombok.*;
 import pl.devwannabe.domain.Role;
+import pl.devwannabe.postgresql.user.UserEntity;
 
 import javax.persistence.*;
 import java.util.Set;

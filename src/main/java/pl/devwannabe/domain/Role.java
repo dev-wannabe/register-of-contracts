@@ -1,7 +1,7 @@
 package pl.devwannabe.domain;
 
 import lombok.*;
-import pl.devwannabe.domain.Model.UserEntity;
+import pl.devwannabe.postgresql.user.UserEntity;
 
 import java.util.Set;
 

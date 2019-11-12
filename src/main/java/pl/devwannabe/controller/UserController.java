@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.devwannabe.domain.User;
-import pl.devwannabe.service.ContractService;
+import pl.devwannabe.service.ContractServiceImpl;
 import pl.devwannabe.service.security.SecurityService;
 import pl.devwannabe.service.security.UserService;
 import pl.devwannabe.utils.WelcomeAsciiArt;
@@ -38,7 +38,7 @@ public class UserController {
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
-        ContractService.printBlue(userForm);
+        ContractServiceImpl.printBlue(userForm);
 
         if (bindingResult.hasErrors()) {
 
