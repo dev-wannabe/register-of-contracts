@@ -1,7 +1,8 @@
 package pl.devwannabe.validation.number_validation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import pl.devwannabe.service.ContractServiceImpl;
+import lombok.NonNull;
+import org.apache.commons.lang3.Validate;
+import pl.devwannabe.domain.contract.ContractService;
 import pl.devwannabe.validation.annotations.Unique;
 
 import javax.validation.ConstraintValidator;
@@ -9,8 +10,14 @@ import javax.validation.ConstraintValidatorContext;
 
 public class UniqueNumberValidator implements ConstraintValidator<Unique, String> {
 
-    @Autowired
-    private ContractServiceImpl contractService;
+
+    @NonNull
+    private ContractService contractService;
+
+    public UniqueNumberValidator(@NonNull ContractService contractService) {
+        Validate.notNull(contractService);
+        this.contractService = contractService;
+    }
 
     @Override
     public void initialize(Unique constraintAnnotation) {
@@ -20,13 +27,13 @@ public class UniqueNumberValidator implements ConstraintValidator<Unique, String
     @Override
     public boolean isValid(String number, ConstraintValidatorContext context) {
 
-        if (contractService == null || contractService.getByContractNumber(number) == null) {
+        if (contractService == null || contractService.getContractByContractNumber(number) == null) {
             return true;
-        } else if (getInputId() != null && contractService != null && contractService.getByContractNumber(number) != null) {
-            boolean isIdEqual = contractService.getByContractNumber(number).getId()
+        } else if (getInputId() != null && contractService != null && contractService.getContractByContractNumber(number) != null) {
+            boolean isIdEqual = contractService.getContractByContractNumber(number).getId()
                     .equals(getInputId());
-            boolean isNumberEqual = contractService.getByContractNumber(number).getNumber()
-                    .equals(contractService.getOne(getInputId()).getNumber());
+            boolean isNumberEqual = contractService.getContractByContractNumber(number).getNumber()
+                    .equals(contractService.getOneContract(getInputId()).getNumber());
             return isIdEqual && isNumberEqual;
         }
         return false;

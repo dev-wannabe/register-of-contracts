@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ContractRepository extends JpaRepository<ContractEntity, Long> {
+public interface ContractJpaRepository extends JpaRepository<ContractEntity, Long> {
 
-    Page<ContractEntity> findByActive(Boolean active, Pageable pageable);
+    Page<ContractEntity> findByActive(boolean active, Pageable pageable);
 
     ContractEntity findByNumber(String contractNumber);
+
 }

@@ -1,4 +1,4 @@
-package pl.devwannabe.domain;
+package pl.devwannabe.domain.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

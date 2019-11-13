@@ -1,7 +1,6 @@
 package pl.devwannabe.postgresql.contract;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import pl.devwannabe.service.ContractServiceImpl;
 
@@ -16,17 +15,16 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Component
 public class ContractEntityListener {
 
-    static private ContractServiceImpl contractService;
+    private static SqlContractRepository sqlContractRepository;
 
     @Autowired
-    @Qualifier("contractService")
-    public void setSearchService(ContractServiceImpl contractService) {
-        this.contractService = contractService;
+    public void setSearch(SqlContractRepository sqlContractRepository) {
+        this.sqlContractRepository = sqlContractRepository;
     }
 
     @PostConstruct
     public void init() {
-        ContractServiceImpl.printBlue("contractService is null? " + (contractService == null));
+        ContractServiceImpl.printBlue("sqlContractRepository is null? " + (sqlContractRepository == null));
     }
 
     @PreUpdate
@@ -43,7 +41,7 @@ public class ContractEntityListener {
         if(contractEntity != null) {
             contractEntity.setDaysLeft(calculateDaysLeft(contractEntity));
             contractEntity.setActive(isActive(contractEntity));
-            contractService.save(contractEntity.convertTo());
+            sqlContractRepository.saveContract(contractEntity.convertTo());
         }
     }
 
@@ -60,7 +58,6 @@ public class ContractEntityListener {
     private boolean isActive(ContractEntity contractEntity) {
         return LocalDate.now().isBefore(contractEntity.getEndDate().plusDays(1)) &&
                 LocalDate.now().isAfter(contractEntity.getStartDate().minusDays(1));
-
     }
 
 }

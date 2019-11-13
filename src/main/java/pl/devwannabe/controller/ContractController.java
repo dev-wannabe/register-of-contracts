@@ -1,6 +1,8 @@
 package pl.devwannabe.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.Validate;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -10,16 +12,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.devwannabe.domain.Contract;
-import pl.devwannabe.service.ContractServiceImpl;
+import pl.devwannabe.domain.contract.Contract;
+import pl.devwannabe.domain.contract.ContractService;
 
 import javax.validation.Valid;
 
+//import pl.devwannabe.service.ContractServiceImpl;
+
+@Slf4j
 @Controller
 public class ContractController {
 
-    @Autowired
-    private ContractServiceImpl contractService;
+    private final ContractService contractService;
+
+    public ContractController(@NonNull ContractService contractService) {
+        Validate.notNull(contractService);
+        this.contractService = contractService;
+    }
 
     @GetMapping("/all-contracts")
     public String showAll(Model model, @RequestParam(defaultValue = "0") int page) {
@@ -32,7 +41,7 @@ public class ContractController {
     @GetMapping("/active-contracts")
     public String showActive(Model model, @RequestParam(defaultValue = "0") int page) {
         model.addAttribute("contractsList", contractService
-                .getByActive(true, PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
+                .getActiveContracts(true, PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
         model.addAttribute("currentPage", page);
         return "active contracts";
     }
@@ -49,33 +58,32 @@ public class ContractController {
     public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            ContractServiceImpl.printBlue("************ There were errors ***********");
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() +
                         " " + error.getDefaultMessage());
             });
             return "errors";
         } else {
-            contractService.save(contract);
+            contractService.saveContract(contract);
             return "redirect:/all-contracts";
         }
     }
 
     @PostMapping("/saveDescription")
     public String saveDescription(Contract contract) {
-        contractService.save(contract);
+        contractService.saveContract(contract);
         return "redirect:/descriptions";
     }
 
     @GetMapping("/delete")
     public String delete(Long id) {
-        contractService.deleteById(id);
+        contractService.deleteContractById(id);
         return "redirect:/all-contracts";
     }
 
     @GetMapping("/getOneContract")
     @ResponseBody
     public Contract getOneContract(@RequestParam("id") Long id) {
-        return contractService.getOne(id);
+        return contractService.getOneContract(id);
     }
 }
