@@ -1,6 +1,7 @@
 package pl.devwannabe.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import org.apache.commons.lang3.Validate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -9,24 +10,32 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.devwannabe.domain.User;
+import pl.devwannabe.domain.User.SecurityService;
+import pl.devwannabe.domain.User.User;
+import pl.devwannabe.domain.User.UserService;
 import pl.devwannabe.service.ContractServiceImpl;
-import pl.devwannabe.service.security.SecurityService;
-import pl.devwannabe.service.security.UserService;
 import pl.devwannabe.utils.WelcomeAsciiArt;
 import pl.devwannabe.validation.user_validation.UserValidator;
 
 @Controller
 public class UserController {
 
-    @Autowired
+    @NonNull
     private UserService userService;
-
-    @Autowired
+    @NonNull
     private SecurityService securityService;
-
-    @Autowired
+    @NonNull
     private UserValidator userValidator;
+
+    public UserController(@NonNull UserService userService, @NonNull SecurityService securityService,
+                          @NonNull UserValidator userValidator) {
+        Validate.notNull(userService);
+        Validate.notNull(securityService);
+        Validate.notNull(userValidator);
+        this.userService = userService;
+        this.securityService = securityService;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/registration")
     public String registration(Model model) {

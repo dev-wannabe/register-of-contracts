@@ -1,4 +1,4 @@
-package pl.devwannabe.domain;
+package pl.devwannabe.domain.User;
 
 import lombok.*;
 import pl.devwannabe.postgresql.role.RoleEntity;

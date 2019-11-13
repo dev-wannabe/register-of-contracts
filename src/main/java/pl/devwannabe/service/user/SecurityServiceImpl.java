@@ -1,25 +1,34 @@
-package pl.devwannabe.service.security;
+package pl.devwannabe.service.user;
 
+import lombok.NonNull;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import pl.devwannabe.domain.User.SecurityService;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityServiceImpl.class);
+
+    @NonNull
+    private final AuthenticationManager authenticationManager;
+    @NonNull
+    private final UserDetailsService userDetailsService;
+
+    public SecurityServiceImpl(@NonNull AuthenticationManager authenticationManager,
+                               @NonNull UserDetailsService userDetailsService) {
+        Validate.notNull(authenticationManager);
+        Validate.notNull(userDetailsService);
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     public String findLoggedInUsername() {

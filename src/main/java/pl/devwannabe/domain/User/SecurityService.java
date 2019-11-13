@@ -1,4 +1,4 @@
-package pl.devwannabe.service.security;
+package pl.devwannabe.domain.User;
 
 public interface SecurityService {
 
