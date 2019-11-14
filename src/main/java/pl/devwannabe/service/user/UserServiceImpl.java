@@ -4,12 +4,10 @@ import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.devwannabe.domain.User.User;
-import pl.devwannabe.domain.User.UserRepository;
-import pl.devwannabe.domain.User.UserService;
-import pl.devwannabe.postgresql.role.RoleRepository;
-
-import java.util.HashSet;
+import pl.devwannabe.domain.role.RoleRepository;
+import pl.devwannabe.domain.user.User;
+import pl.devwannabe.domain.user.UserRepository;
+import pl.devwannabe.domain.user.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        user.setRoles(roleRepository.findAll());
         userRepository.save(user);
     }
 

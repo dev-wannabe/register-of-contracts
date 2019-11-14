@@ -3,10 +3,10 @@ package pl.devwannabe.postgresql.user;
 import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Repository;
-import pl.devwannabe.domain.User.User;
+import pl.devwannabe.domain.user.User;
 
 @Repository
-public class SqlUserRepository implements pl.devwannabe.domain.User.UserRepository {
+public class SqlUserRepository implements pl.devwannabe.domain.user.UserRepository {
 
     @NonNull
     private final UserJpaRepository userJpaRepository;

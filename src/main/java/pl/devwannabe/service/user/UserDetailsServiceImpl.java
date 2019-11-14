@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.devwannabe.domain.Role;
-import pl.devwannabe.domain.User.User;
-import pl.devwannabe.domain.User.UserRepository;
+import pl.devwannabe.domain.role.Role;
+import pl.devwannabe.domain.user.User;
+import pl.devwannabe.domain.user.UserRepository;
 import pl.devwannabe.postgresql.role.RoleEntity;
 
 import java.util.HashSet;
@@ -37,7 +37,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             user = userRepository.findByUsername(username);
         } else {
             user = null;
-
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         Set<Role> roles = user.getRoles().stream().map(RoleEntity::convertTo).collect(Collectors.toSet());

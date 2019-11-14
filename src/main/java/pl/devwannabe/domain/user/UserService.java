@@ -1,4 +1,4 @@
-package pl.devwannabe.domain.User;
+package pl.devwannabe.domain.user;
 
 import lombok.NonNull;
 

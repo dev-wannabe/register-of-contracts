@@ -1,4 +1,4 @@
-package pl.devwannabe.domain.User;
+package pl.devwannabe.domain.user;
 
 import lombok.*;
 import pl.devwannabe.postgresql.role.RoleEntity;
@@ -11,12 +11,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class User {
-    private Long id;
 
+    private Long id;
     private String username;
     private String password;
-
     private String passwordConfirm;
-
     private Set<RoleEntity> roles;
+
 }

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import pl.devwannabe.domain.User.User;
-import pl.devwannabe.domain.User.UserService;
+import pl.devwannabe.domain.user.User;
+import pl.devwannabe.domain.user.UserService;
 
 @Component
 public class UserValidator implements Validator {

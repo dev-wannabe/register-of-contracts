@@ -1,7 +1,7 @@
 package pl.devwannabe.postgresql.role;
 
 import lombok.*;
-import pl.devwannabe.domain.Role;
+import pl.devwannabe.domain.role.Role;
 import pl.devwannabe.postgresql.user.UserEntity;
 
 import javax.persistence.*;
@@ -39,6 +39,5 @@ public class RoleEntity {
                 .users(users)
                 .build();
     }
-
 
 }

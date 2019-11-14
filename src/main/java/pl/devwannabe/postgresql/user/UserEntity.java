@@ -1,7 +1,7 @@
 package pl.devwannabe.postgresql.user;
 
 import lombok.*;
-import pl.devwannabe.domain.User.User;
+import pl.devwannabe.domain.user.User;
 import pl.devwannabe.postgresql.role.RoleEntity;
 
 import javax.persistence.*;
@@ -29,6 +29,7 @@ public class UserEntity {
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<RoleEntity> roles;
 
     public static UserEntity convertFrom(User user) {
@@ -50,4 +51,5 @@ public class UserEntity {
                 .roles(roles)
                 .build();
     }
+
 }
