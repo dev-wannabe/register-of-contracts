@@ -13,13 +13,13 @@ import pl.devwannabe.domain.user.UserService;
 public class UserServiceImpl implements UserService {
 
     @NonNull
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     @NonNull
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
     @NonNull
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @NonNull
-    private AsciiArtUserGreeter asciiArtUserGreeter;
+    private final AsciiArtUserGreeter asciiArtUserGreeter;
 
     public UserServiceImpl(@NonNull UserRepository userRepository, @NonNull RoleRepository roleRepository,
                            @NonNull BCryptPasswordEncoder bCryptPasswordEncoder, @NonNull AsciiArtUserGreeter asciiArtUserGreeter) {
