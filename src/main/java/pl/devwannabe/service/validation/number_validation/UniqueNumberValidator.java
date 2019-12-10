@@ -1,9 +1,9 @@
-package pl.devwannabe.validation.number_validation;
+package pl.devwannabe.service.validation.number_validation;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
 import pl.devwannabe.domain.contract.ContractService;
-import pl.devwannabe.validation.annotations.Unique;
+import pl.devwannabe.service.validation.annotations.Unique;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

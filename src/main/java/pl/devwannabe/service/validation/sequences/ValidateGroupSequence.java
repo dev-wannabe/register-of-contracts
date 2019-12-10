@@ -1,4 +1,4 @@
-package pl.devwannabe.validation.sequences;
+package pl.devwannabe.service.validation.sequences;
 
 import javax.validation.GroupSequence;
 import javax.validation.groups.Default;

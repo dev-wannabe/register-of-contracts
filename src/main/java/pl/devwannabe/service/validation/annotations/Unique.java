@@ -1,6 +1,7 @@
-package pl.devwannabe.validation.annotations;
+package pl.devwannabe.service.validation.annotations;
 
-import pl.devwannabe.validation.date_validation.InputStartDateContractSupplier;
+import pl.devwannabe.service.validation.number_validation.InputIdContractSupplier;
+import pl.devwannabe.service.validation.number_validation.UniqueNumberValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,8 +13,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {InputStartDateContractSupplier.class})
-public @interface StartDate {
+@Constraint(validatedBy = {InputIdContractSupplier.class, UniqueNumberValidator.class})
+public @interface Unique {
 
     String message();
 

@@ -18,15 +18,19 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     @NonNull
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @NonNull
+    private AsciiArtUserGreeter asciiArtUserGreeter;
 
     public UserServiceImpl(@NonNull UserRepository userRepository, @NonNull RoleRepository roleRepository,
-                           @NonNull BCryptPasswordEncoder bCryptPasswordEncoder) {
+                           @NonNull BCryptPasswordEncoder bCryptPasswordEncoder, @NonNull AsciiArtUserGreeter asciiArtUserGreeter) {
         Validate.notNull(userRepository);
         Validate.notNull(roleRepository);
         Validate.notNull(bCryptPasswordEncoder);
+        Validate.notNull(asciiArtUserGreeter);
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.asciiArtUserGreeter = asciiArtUserGreeter;
     }
 
     @Override
@@ -39,5 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public String generateUserGreeting(char asciiArtChar, String input) {
+        return asciiArtUserGreeter.makeAsciiArt(asciiArtChar, input);
     }
 }

@@ -1,9 +1,12 @@
-package pl.devwannabe.utils;
+package pl.devwannabe.service.user;
+
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WelcomeAsciiArt {
+@Service
+public class AsciiArtUserGreeter {
 
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!0123456789";
     private static final int WIDTH = 5;

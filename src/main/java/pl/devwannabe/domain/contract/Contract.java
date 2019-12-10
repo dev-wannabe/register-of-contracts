@@ -6,11 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.devwannabe.validation.annotations.EndDate;
-import pl.devwannabe.validation.annotations.StartDate;
-import pl.devwannabe.validation.annotations.Unique;
-import pl.devwannabe.validation.sequences.ValidateGroupFirst;
-import pl.devwannabe.validation.sequences.ValidateGroupSecond;
+import pl.devwannabe.service.validation.annotations.EndDate;
+import pl.devwannabe.service.validation.annotations.StartDate;
+import pl.devwannabe.service.validation.annotations.Unique;
+import pl.devwannabe.service.validation.sequences.ValidateGroupFirst;
+import pl.devwannabe.service.validation.sequences.ValidateGroupSecond;
 
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
@@ -27,7 +27,7 @@ import java.time.LocalDate;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contract {
 
-    @Unique(groups = ValidateGroupFirst.class, message = "Annotation is here for idContractInputSupplier class ")
+    @Unique(groups = ValidateGroupFirst.class, message = "Annotation for idContractInputSupplier")
     private Long id;
 
     @Size(min = 1, max = 50, message = "''System Name'' have to contain from 1 to 50 characters")

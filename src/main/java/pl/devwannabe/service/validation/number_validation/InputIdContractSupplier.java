@@ -1,6 +1,6 @@
-package pl.devwannabe.validation.number_validation;
+package pl.devwannabe.service.validation.number_validation;
 import org.springframework.stereotype.Component;
-import pl.devwannabe.validation.annotations.Unique;
+import pl.devwannabe.service.validation.annotations.Unique;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,6 +1,6 @@
-package pl.devwannabe.validation.date_validation;
+package pl.devwannabe.service.validation.date_validation;
 
-import pl.devwannabe.validation.annotations.StartDate;
+import pl.devwannabe.service.validation.annotations.StartDate;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

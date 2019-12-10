@@ -1,4 +1,4 @@
-package pl.devwannabe.controller;
+package pl.devwannabe.rest;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.Validate;
@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.devwannabe.domain.user.SecurityService;
 import pl.devwannabe.domain.user.User;
 import pl.devwannabe.domain.user.UserService;
-import pl.devwannabe.service.ContractServiceImpl;
-import pl.devwannabe.utils.WelcomeAsciiArt;
-import pl.devwannabe.validation.user_validation.UserValidator;
+import pl.devwannabe.service.contract.ContractServiceImpl;
+import pl.devwannabe.service.validation.user_validation.UserValidator;
 
 @Controller
 public class UserController {
@@ -81,8 +80,7 @@ public class UserController {
     public String welcome(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedInUsername = auth.getName();
-        WelcomeAsciiArt asciiArt = new WelcomeAsciiArt();
-        model.addAttribute("hello", asciiArt.makeAsciiArt('#', "Hello " + loggedInUsername + " !!!"));
+        model.addAttribute("hello", userService.generateUserGreeting('#', "Hello " + loggedInUsername + " !!!"));
         return "welcome";
     }
 }

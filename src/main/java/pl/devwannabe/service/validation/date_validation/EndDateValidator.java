@@ -1,7 +1,7 @@
-package pl.devwannabe.validation.date_validation;
+package pl.devwannabe.service.validation.date_validation;
 
-import pl.devwannabe.service.ContractServiceImpl;
-import pl.devwannabe.validation.annotations.EndDate;
+import pl.devwannabe.service.contract.ContractServiceImpl;
+import pl.devwannabe.service.validation.annotations.EndDate;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

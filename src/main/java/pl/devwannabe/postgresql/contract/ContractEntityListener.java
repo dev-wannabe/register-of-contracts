@@ -2,7 +2,7 @@ package pl.devwannabe.postgresql.contract;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.devwannabe.service.ContractServiceImpl;
+import pl.devwannabe.service.contract.ContractServiceImpl;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.PostLoad;

@@ -1,4 +1,4 @@
-package pl.devwannabe.controller;
+package pl.devwannabe.rest;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,6 @@ import pl.devwannabe.domain.contract.ContractService;
 
 import javax.validation.Valid;
 
-//import pl.devwannabe.service.ContractServiceImpl;
 
 @Slf4j
 @Controller

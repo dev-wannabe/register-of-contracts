@@ -1,4 +1,4 @@
-package pl.devwannabe.service;
+package pl.devwannabe.service.contract;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.Validate;

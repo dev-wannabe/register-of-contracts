@@ -8,4 +8,6 @@ public interface UserService {
 
     User findByUsername(@NonNull String username);
 
+    String generateUserGreeting(@NonNull char asciiArtChar, @NonNull String input);
+
 }

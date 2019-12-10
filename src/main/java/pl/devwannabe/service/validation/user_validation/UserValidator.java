@@ -1,4 +1,4 @@
-package pl.devwannabe.validation.user_validation;
+package pl.devwannabe.service.validation.user_validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
