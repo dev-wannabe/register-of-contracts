@@ -20,11 +20,11 @@ import pl.devwannabe.service.validation.user_validation.UserValidator;
 public class UserController {
 
     @NonNull
-    private UserService userService;
+    private final UserService userService;
     @NonNull
-    private SecurityService securityService;
+    private final SecurityService securityService;
     @NonNull
-    private UserValidator userValidator;
+    private final UserValidator userValidator;
 
     public UserController(@NonNull UserService userService, @NonNull SecurityService securityService,
                           @NonNull UserValidator userValidator) {
