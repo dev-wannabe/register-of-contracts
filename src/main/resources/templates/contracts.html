@@ -9,7 +9,7 @@
             src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}" src="../static/js/main.js"></script>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/contracts.css" th:href="@{/css/contracts.css}">
 </head>
@@ -21,15 +21,15 @@
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
 
     <div>
-        <a style="color:white" th:href="@{/all-contracts}"><big><b>All contracts</b></big></a>
+        <a style="color:white" th:href="@{/register/contract/all}"><big><b>All contracts</b></big></a>
         &nbsp
         <span style="color:white">/</span>
         &nbsp
-        <a style="color:white" th:href="@{/active-contracts}"><big><b>Active contract</b></big></a>
+        <a style="color:white" th:href="@{/register/contract/active}"><big><b>Active contract</b></big></a>
         &nbsp
         <span style="color:white">/</span>
         &nbsp
-        <a style="color:white" th:href="@{/descriptions}"><big><b>Systems description</b></big></a>
+        <a style="color:white" th:href="@{/register/contract/description}"><big><b>Systems description</b></big></a>
     </div>
     </br> </br> </br>
 
@@ -68,9 +68,9 @@
                     <td class="daysLeftContent" th:utext="${#strings.escapeXml(contract.daysLeft)}">days left</td>
                     <td class="activeContent" th:utext="${#strings.escapeXml(contract.active ? 'Yes' : 'No')}">active
                     </td>
-                    <td><a th:href="@{getOneContract/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
+                    <td><a th:href="@{/register/contract/id/(id=${contract.id})}" class="btn btn-primary editBtn">Edit</a>
                     <td>
-                    <td><a th:href="@{delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
+                    <td><a th:href="@{/register/contract/delete/(id=${contract.id})}" class="btn btn-danger delBtn">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -78,7 +78,7 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"
                     th:each="i : ${#numbers.sequence(0, contractsList.totalPages -1)}">
-                    <a th:href="@{/all-contracts(page=${i})}" th:text="${i+1}" class="nav-link"
+                    <a th:href="@{/register/contract/all(page=${i})}" th:text="${i+1}" class="nav-link"
                        th:classappend="${currentPage}==${i}?'active':''"></a>
                 </li>
             </ul>
@@ -86,7 +86,7 @@
     </div>
     <!-----------------EDIT----------------->
     <div class="editForm">
-        <form th:action="@{/saveContract}" method="post">
+        <form th:action="@{/register/contract/save}" method="post">
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">

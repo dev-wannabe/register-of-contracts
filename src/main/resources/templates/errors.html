@@ -9,7 +9,6 @@
             src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/errors.css" th:href="@{/css/errors.css}">
@@ -23,7 +22,7 @@
     <hr COLOR="LightGray" SIZE="1" WIDTH="100%" ALIGN="LEFT">
     </br>
 
-    <form class="form-horizontal" th:object="${contract}" th:action="@{/saveContract}" th:method="post">
+    <form class="form-horizontal" th:object="${contract}" th:action="@{/register/contract/save}" th:method="post">
 
         <div class="form-group">
             <input type="hidden" class="form-control" th:field="*{id}"/>
@@ -65,7 +64,7 @@
             <input type="submit" class="btn btn-primary saveBtn" value="save"/>
             &nbsp
             &nbsp
-            <a th:href="@{/all-contracts}" class="btn btn-info" role="button">leave without saving</a>
+            <a th:href="@{/register/contract/all}" class="btn btn-info" role="button">leave without saving</a>
 
         </div>
 

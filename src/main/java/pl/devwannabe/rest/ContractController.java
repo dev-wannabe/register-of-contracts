@@ -8,10 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.devwannabe.domain.contract.Contract;
 import pl.devwannabe.domain.contract.ContractService;
 
@@ -20,6 +17,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
+@RequestMapping("/register/contract")
 public class ContractController {
 
     private final ContractService contractService;
@@ -29,7 +27,13 @@ public class ContractController {
         this.contractService = contractService;
     }
 
-    @GetMapping("/all-contracts")
+    @GetMapping("/id")
+    @ResponseBody
+    public Contract getOneContract(@RequestParam("id") Long id) {
+        return contractService.getOneContract(id);
+    }
+
+    @GetMapping("/all")
     public String showAll(Model model, @RequestParam(defaultValue = "0") int page) {
         model.addAttribute("contractsList", contractService
                 .getAllContracts(PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
@@ -37,7 +41,7 @@ public class ContractController {
         return "contracts";
     }
 
-    @GetMapping("/active-contracts")
+    @GetMapping("/active")
     public String showActive(Model model, @RequestParam(defaultValue = "0") int page) {
         model.addAttribute("contractsList", contractService
                 .getActiveContracts(true, PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
@@ -45,17 +49,8 @@ public class ContractController {
         return "active contracts";
     }
 
-    @GetMapping("/descriptions")
-    public String showWithDescriptions(Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("contractsList", contractService
-                .getAllContracts(PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
-        model.addAttribute("currentPage", page);
-        return "descriptions";
-    }
-
-    @PostMapping("/saveContract")
+    @PostMapping("/save")
     public String saveContract(@Valid Contract contract, BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() +
@@ -64,25 +59,31 @@ public class ContractController {
             return "errors";
         } else {
             contractService.saveContract(contract);
-            return "redirect:/all-contracts";
+            return "redirect:/register/contract/all";
         }
-    }
-
-    @PostMapping("/saveDescription")
-    public String saveDescription(Contract contract) {
-        contractService.saveContract(contract);
-        return "redirect:/descriptions";
     }
 
     @GetMapping("/delete")
     public String delete(Long id) {
         contractService.deleteContractById(id);
-        return "redirect:/all-contracts";
+        return "redirect:/register/contract/all";
     }
 
-    @GetMapping("/getOneContract")
-    @ResponseBody
-    public Contract getOneContract(@RequestParam("id") Long id) {
-        return contractService.getOneContract(id);
+    @GetMapping("/description")
+    public String showWithDescriptions(Model model, @RequestParam(defaultValue = "0") int page) {
+        model.addAttribute("contractsList", contractService
+                .getAllContracts(PageRequest.of(page, 5, Sort.Direction.ASC, "startDate")));
+        model.addAttribute("currentPage", page);
+        return "descriptions";
     }
+
+    @PostMapping("/description/save")
+    public String saveDescription(Contract contract) {
+        contractService.saveContract(contract);
+        return "redirect:/register/contract/description";
+    }
+
+
+
+
 }

@@ -61,7 +61,7 @@ public class UserController {
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/register/contract/welcome";
     }
 
     @GetMapping("/login")
@@ -72,11 +72,10 @@ public class UserController {
         if (logout != null) {
             model.addAttribute("message", "You have been logged out successfully.");
         }
-
         return "login";
     }
 
-    @GetMapping(value={"/","/welcome"})
+    @GetMapping(value={"/","register/contract/welcome"})
     public String welcome(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String loggedInUsername = auth.getName();

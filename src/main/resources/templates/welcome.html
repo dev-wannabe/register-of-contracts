@@ -7,11 +7,10 @@
             src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-
     <link rel="stylesheet" type="text/css" href="/static/css/welcome.css" th:href="@{/css/welcome.css}">
+
     <title>Welcome</title>
 </head>
 
@@ -26,7 +25,7 @@
     </br> </br> </br>
 
 
-    <div id="marquee" th:action="@{/welcome}">
+    <div id="marquee" th:action="@{register/contract/welcome}">
 
         <h1><b>
             <marquee bgcolor="CornflowerBlue" scrollamount="15"
@@ -35,7 +34,7 @@
             </marquee>
         </b></h1>
         <br/>
-        <a th:href="@{/all-contracts}" class="btn btn-info btn-lg goInBtn" role="button"><h1>Go in</h1></a>
+        <a th:href="@{/register/contract/all}" class="btn btn-info btn-lg goInBtn" role="button"><h1>Go in</h1></a>
     </div>
 </div>
 </body>

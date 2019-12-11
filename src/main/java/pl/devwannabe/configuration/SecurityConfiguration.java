@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**");
     }
@@ -30,13 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resources/**", "/webjars/**", "/registration").permitAll()
-                .antMatchers("/", "/welcome", "/all-contracts", "/active-contracts", "/descriptions")
+                .antMatchers("/webjars/**", "/registration").permitAll()
+                .antMatchers("/", "/register/contract/**")
                 .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").defaultSuccessUrl("/welcome")
+                .loginPage("/login").defaultSuccessUrl("/register/contract/welcome")
                 .permitAll()
                 .and()
                 .logout()
